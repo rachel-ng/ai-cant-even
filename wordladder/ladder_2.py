@@ -20,9 +20,9 @@ def fh_comp(a,b):
     return 1
 
 def f_comp(a,b):
-    if len(a) + a[0] == len(b) + b[0]:
+    if len(a) + a[0] ** 2 == len(b) + b[0] ** 2:
             return 0
-    if len(a) + a[0] < len(b) + b[0]:
+    if len(a) + a[0] ** 2 < len(b) + b[0] ** 2:
         #if a[0] < b[0]:
         return -1
     #     else:
@@ -134,7 +134,7 @@ def dctnry (lngth):
             for i in ln:
                 s = word[:i] + "_" + word[i+1:]
                 d[s] = d.get(s, []) + [word]
-
+        #print(d)
         dct = dict([])
         for word in d_file:
             for i in ln:
@@ -154,36 +154,26 @@ def word_diff (a,b):
     return sim
 
 
-def search (lngth,start,end) :
-    dct = dctnry(lngth)
+def search (dct,lngth,start,end):
     if end in dct[start] or start in dct[end]:
-        #print(str(len([start,end])) + "\t" + str([start,end]))
-        print(str(len(dct) - 1) + "\n1\t" + str([start,end]))
+        print("1 2\t" + str([start,end]))
         return [start,end]
-    un = set(dct.keys())
-    u = [[word_diff(i,end),start,i] for i in dct[start] - set([start])]
-    #print(u)
-    f = Pqueue(fh_comp,u)
+    f = Pqueue(fh_comp,[[word_diff(i,end),start,i] for i in dct[start] - set([start])])
     e = set([])
     e.add(start)
-    #print(u)
 
-    while word_diff(f.peek()[-1],end) < lngth:
+    while f.size > 0:
         w = f.pop()
         e.add(w[-1])
-        un -= e
         l = dct[w[-1]] - e
         dct[w[-1]] = set([])
         if end in l:
             ans = w[1:] + [end]
-            print(len(un))
             print(str(w[0]) + " " + str(len(ans))+ "\t" + str(ans))
             return ans
-        f.push_all([[word_diff(w[-1],end)] + w[1:] + [n] for n in l])
-        #print(f.internal_list())
+        f.push_all([[w[0] + word_diff(w[-1],end)] + w[1:] + [n] for n in l])
 
     print("well shit, this is awkward")
-    #print("\n\nexplored:\t" + str(e))
     return [start,end]
 
 
@@ -194,8 +184,10 @@ def wordladder (in_f,out_f):
         i_file.close()
         #print(input_f)
         s = ""
+        lngth = len(input_f[0][0])
+        dct = dctnry(lngth)
         for i in input_f:
-            for l in search(len(i[0]),i[0],i[1]):
+            for l in search(dct,lngth,i[0],i[1]):
                 s += l + ","
             s = s[:-1]
             s += "\n"
