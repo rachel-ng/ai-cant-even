@@ -6,9 +6,16 @@ def OrdinaryComparison(a,b):
     if a == b: return 0
     return 1
 
-def f_comp(a,b):
-    if len(a) < len(b): return -1
-    if len(a) == len(b): return 0
+def len_comp(a,b):
+    if len(a) == len(b):
+        if a[0] < b[0]:
+            return -1
+        if a[0] > b[0]:
+            return 1
+        else:
+            return 0
+    if len(a) < len(b):
+        return -1
     return 1
 
 class Pqueue:
@@ -114,35 +121,33 @@ def dctnry (lngth):
     except FileNotFoundError:
         print("so uh, you don't have a dictionary broski")
 
-def search (lngth,start,end) :
-    dct = dctnry(lngth)
+def word_diff (a,b):
+    sim = 0
+    for i in range(len(a)):
+        if a[i] == b[i]:
+            sim += 1
+    return sim
+
+
+def search (dct,lngth,start,end):
     if end in dct[start] or start in dct[end]:
-        print(str(len(dct) - 1) + "\n" + str([start,end]))
+        #print(str(len([start,end])) + "\t" + str([start,end]))
         return [start,end]
-    un = set(dct.keys())
-    u = [[start,i] for i in dct[start] - set([start])]
-    f = Pqueue(f_comp,u)
-    e = set([])
-    e.add(start)
+    f = Pqueue(len_comp,[[lngth - word_diff(start,end) + lngth - word_diff(i,end),start,i] for i in dct[start] - set([start])])
+    e = set([start])
 
     while f.size > 0:
         w = f.pop()
         e.add(w[-1])
-        un -= e
         l = dct[w[-1]] - e
-        dct[w[-1]] = set([])
+        e |= l
         if end in l:
-            ans = w + [end]
-            print(len(un))
-            print(str(len(ans))+ "\t" + str(ans))
+            ans = w[1:] + [end]
+            #print(str(len(ans)) + "\t" + str(ans))
             return ans
-        f.push_all([w + [n] for n in l])
+        f.push_all([[w[0] + lngth - word_diff(w[-1],end)] + w[1:] + [n] for n in l])
 
-    print("well shit, this is awkward")
-    #print("\n\nexplored:\t" + str(e))
-    #print("\nf:\t" + str(f.internal_list()) + "\n")
-    print(len(un))
-    print([start,end])
+    #print("nuh" + "\t" + str([start,end]))
     return [start,end]
 
 
@@ -153,12 +158,13 @@ def wordladder (in_f,out_f):
         i_file.close()
 
         s = ""
+        lngth = len(input_f[0][0])
+        dct = dctnry(lngth)
         for i in input_f:
-            for l in search(len(i[0]),i[0],i[1]):
+            for l in search(dct,lngth,i[0],i[1]):
                 s += l + ","
             s = s[:-1]
             s += "\n"
-            #print(s)
 
         o_file = open(out_f, "w+")
         o_file.write(s)
@@ -166,11 +172,20 @@ def wordladder (in_f,out_f):
     except FileNotFoundError:
         print("so uh," + in_f + "doesn't exist broski")
 
+def try_all ():
+    lngth = 4
+    dct = dctnry(lngth)
+    for i in dct:
+        for x in dct:
+            re = search(dct,lngth,i,x)
+            if len(re) > 10:
+                print(str(len(re)) + "\t" + str(re))
 
 if __name__ == "__main__":
-    wordladder(sys.argv[1], sys.argv[2])
+    #wordladder(sys.argv[1], sys.argv[2])
+    #search(dctnry(len(sys.argv[1])), len(sys.argv[1]), sys.argv[1], sys.argv[2])
     #print("\n\n\n")
+    try_all()
 
-
-    #python3 neighbors.py  harry.txt  answers.txt
-    #python3 neighbors.py doublets.txt adfjkls.txt
+    #python3 ladder.py  harry.txt  answers.txt
+    #python3 ladder.py doublets.txt adfjkls.txt
