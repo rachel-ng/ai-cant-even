@@ -183,6 +183,7 @@ def try_all ():
             if len(re) > 10:
                 if len(re) > len(longest):
                     longest = re
+                    print(str(len(re)) + "\t" + str(re))
                 s += str(len(re)) + "\t" + str(re) + "\n"
 
     o_file = open("superlong.txt", "w+")
