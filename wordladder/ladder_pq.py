@@ -178,6 +178,7 @@ def try_all ():
     longest = ""
     s = ""
     for i in dct:
+        print(i)
         for x in dct:
             re = search(dct,lngth,i,x)
             if len(re) > 10:
