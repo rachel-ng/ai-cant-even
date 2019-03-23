@@ -6,23 +6,22 @@ def OrdinaryComparison(a,b):
     if a == b: return 0
     return 1
 
-def fh_comp(a,b):
+def len_comp(a,b):
     if len(a) == len(b):
         if a[0] < b[0]:
             return -1
+        if a[0] > b[0]:
+            return 1
         else:
             return 0
     if len(a) < len(b):
-        #if a[0] < b[0]:
         return -1
-    #     else:
-    #         return 0
     return 1
 
 def f_comp(a,b):
-    if len(a) + a[0] ** 2 == len(b) + b[0] ** 2:
+    if len(a) + a[0] == len(b) + b[0]:
             return 0
-    if len(a) + a[0] ** 2 < len(b) + b[0] ** 2:
+    if len(a) + a[0] < len(b) + b[0]:
         #if a[0] < b[0]:
         return -1
     #     else:
@@ -158,22 +157,28 @@ def search (dct,lngth,start,end):
     if end in dct[start] or start in dct[end]:
         print("1 2\t" + str([start,end]))
         return [start,end]
-    f = Pqueue(fh_comp,[[word_diff(i,end),start,i] for i in dct[start] - set([start])])
-    e = set([])
-    e.add(start)
+    print(lngth - word_diff(start,end))
+    f = Pqueue(len_comp,[[lngth - word_diff(start,end) + lngth - word_diff(i,end),start,i] for i in dct[start] - set([start])])
+    e = set([start])
 
     while f.size > 0:
         w = f.pop()
+        #print(w)
         e.add(w[-1])
+        #print(dct[w[-1]])
         l = dct[w[-1]] - e
-        dct[w[-1]] = set([])
+        e |= l
+        #if l:print(w,l)
+        #dct[w[-1]] = set([])
         if end in l:
             ans = w[1:] + [end]
             print(str(w[0]) + " " + str(len(ans))+ "\t" + str(ans))
             return ans
-        f.push_all([[w[0] + word_diff(w[-1],end)] + w[1:] + [n] for n in l])
+        f.push_all([[w[0] + lngth - word_diff(w[-1],end)] + w[1:] + [n] for n in l])
+        #print("\n\n")
 
-    print("well shit, this is awkward")
+    print("well sh!t, this is awkward")
+    print("nuh\t" + str([start,end]))
     return [start,end]
 
 
