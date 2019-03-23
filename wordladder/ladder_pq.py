@@ -175,11 +175,19 @@ def wordladder (in_f,out_f):
 def try_all ():
     lngth = 4
     dct = dctnry(lngth)
+    longest = ""
+    s = ""
     for i in dct:
         for x in dct:
             re = search(dct,lngth,i,x)
             if len(re) > 10:
-                print(str(len(re)) + "\t" + str(re))
+                if len(re) > len(longest):
+                    longest = re
+                s += str(len(re)) + "\t" + str(re) + "\n"
+
+    o_file = open("superlong.txt", "w+")
+    o_file.write(s)
+    o_file.close()
 
 if __name__ == "__main__":
     #wordladder(sys.argv[1], sys.argv[2])
