@@ -1,4 +1,3 @@
 head
 love
 bozo
-cake
