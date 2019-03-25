@@ -1,24 +1,23 @@
 #!/usr/bin/python
 import sys
-#from datetime import datetime
 
 def dctnry (lngth):
     try:
         fin = open("dictall.txt","r")
-        d_file = [i for i in fin.read().split("\n") if i != "" and len(i) == lngth]
+        dict_raw = [i for i in fin.read().split("\n") if i != "" and len(i) == lngth]
         fin.close()
         place = [dict([[i, set([])] for i in "abcdefghijklmnopqrstuvwxyz"]) for x in range(lngth)]
-        dct = dict([[i, []] for i in d_file])
+        dct = dict([[i, []] for i in dict_raw])
 
-        for i in d_file:
+        for i in dict_raw:
             n = 0
             for p in i:
                 place[n][p].add(i)
                 n += 1
 
-        for i in d_file:
+        for i in dict_raw:
             places = [place[n][p] for n,p in enumerate(i,0)]
-            dct[i] = set.union(*[set.intersection(*[k for k in places if k != j]) for j in places]) - set([i])
+            dct[i] = set.union(*[set.intersection(*[k for k in places if k != x]) for x in places]) - set([i])
 
         return dct
 
@@ -44,10 +43,6 @@ def neighbors (in_f, out_f):
         print("so uh, " + in_f + " don't exist broski")
 
 if __name__ == "__main__":
-    #start = datetime.now()
     neighbors(sys.argv[1], sys.argv[2])
-    #print (datetime.now()-start)
-
-
 
 #python3 neighbors.py  harry.txt  answers.txt
