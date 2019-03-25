@@ -131,7 +131,7 @@ def word_diff (a,b):
 
 def search (dct,lngth,start,end):
     if end in dct[start] or start in dct[end]:
-        #print("1 2\t" + str([start,end]))
+        print("1 2\t" + str([start,end]))
         return [start,end]
     #print(lngth - word_diff(start,end))
     f = Pqueue(len_comp,[[lngth - word_diff(start,end) + lngth - word_diff(i,end),start,i] for i in dct[start] - set([start])])
@@ -148,13 +148,13 @@ def search (dct,lngth,start,end):
         #dct[w[-1]] = set([])
         if end in l:
             ans = w[1:] + [end]
-            #print(str(w[0]) + " " + str(len(ans))+ "\t" + str(ans))
+            print(str(w[0]) + " " + str(len(ans))+ "\t" + str(ans))
             return ans
         f.push_all([[w[0] + lngth - word_diff(w[-1],end)] + w[1:] + [n] for n in l])
         #print("\n\n")
 
     #print("well sh!t, this is awkward")
-    #print("nuh\t" + str([start,end]))
+    print("nuh\t" + str([start,end]))
     return [start,end]
 
 
