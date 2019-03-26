@@ -172,29 +172,30 @@ def wordladder (in_f,out_f):
     except FileNotFoundError:
         print("so uh," + in_f + "doesn't exist broski")
 
-def try_all ():
-    lngth = 4
+def try_all (lngth):
     dct = dctnry(lngth)
     longest = ""
     s = ""
+    checked = set([])
     for i in dct:
         print(i)
         for x in dct:
-            re = search(dct,lngth,i,x)
-            if len(re) > 10:
-                if len(re) > len(longest):
-                    longest = re
+            if x not in checked and word_diff(i,x) < lngth - 2:
+                re = search(dct,lngth,i,x)
+                if len(re) > 10:
+                    if len(re) > len(longest):
+                        longest = re
+                        s += str(len(re)) + "\t" + str(re) + "\n"
                     print(str(len(re)) + "\t" + str(re))
-                    s += str(len(re)) + "\t" + str(re) + "\n"
-                    o_file = open("superlong.txt", "w+")
+                    o_file = open("superlong" + str(lngth) + ".txt", "w+")
                     o_file.write(s)
                     o_file.close()
-
+        checked.add(i)
 if __name__ == "__main__":
     #wordladder(sys.argv[1], sys.argv[2])
     #search(dctnry(len(sys.argv[1])), len(sys.argv[1]), sys.argv[1], sys.argv[2])
     #print("\n\n\n")
-    try_all()
+    try_all(int(sys.argv[1]))
 
     #python3 ladder.py  harry.txt  answers.txt
     #python3 ladder.py doublets.txt adfjkls.txt
