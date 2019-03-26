@@ -186,10 +186,9 @@ def try_all ():
                     longest = re
                     print(str(len(re)) + "\t" + str(re))
                     s += str(len(re)) + "\t" + str(re) + "\n"
-
-    o_file = open("superlong.txt", "w+")
-    o_file.write(s)
-    o_file.close()
+                    o_file = open("superlong.txt", "w+")
+                    o_file.write(s)
+                    o_file.close()
 
 if __name__ == "__main__":
     #wordladder(sys.argv[1], sys.argv[2])
