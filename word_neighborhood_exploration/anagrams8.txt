@@ -1,0 +1,152 @@
+adroitly 3	['adroitly', 'dilatory', 'idolatry']
+
+agnostic 3	['agnostic', 'coasting', 'coatings']
+
+ailments 3	['ailments', 'aliments', 'manliest']
+
+alerting 5	['alerting', 'altering', 'integral', 'relating', 'triangle']
+
+aligners 4	['aligners', 'realigns', 'signaler', 'slangier']
+
+ancients 3	['ancients', 'canniest', 'instance']
+
+angriest 5	['angriest', 'gantries', 'granites', 'ingrates', 'rangiest']
+
+antsiest 3	['antsiest', 'instates', 'nastiest']
+
+arrested 3	['arrested', 'retreads', 'serrated']
+
+ateliers 3	['ateliers', 'earliest', 'realties']
+
+ballsier 3	['ballsier', 'brailles', 'liberals']
+
+bounders 3	['bounders', 'rebounds', 'suborned']
+
+calipers 3	['calipers', 'replicas', 'spiracle']
+
+cantered 3	['cantered', 'decanter', 'recanted']
+
+caterers 3	['caterers', 'retraces', 'terraces']
+
+catering 3	['catering', 'creating', 'reacting']
+
+cavilers 3	['cavilers', 'claviers', 'visceral']
+
+censored 3	['censored', 'encoders', 'seconder']
+
+chanters 3	['chanters', 'snatcher', 'stancher']
+
+chastens 3	['chastens', 'snatches', 'stanches']
+
+cheaters 3	['cheaters', 'hectares', 'teachers']
+
+claimers 3	['claimers', 'miracles', 'reclaims']
+
+comedian 3	['comedian', 'daemonic', 'demoniac']
+
+compiles 3	['compiles', 'complies', 'polemics']
+
+construe 4	['construe', 'counters', 'recounts', 'trounces']
+
+coursing 3	['coursing', 'scouring', 'sourcing']
+
+cratered 3	['cratered', 'retraced', 'terraced']
+
+critters 3	['critters', 'restrict', 'stricter']
+
+deadlier 3	['deadlier', 'derailed', 'redialed']
+
+dealings 3	['dealings', 'leadings', 'signaled']
+
+deanship 3	['deanship', 'headpins', 'pinheads']
+
+decimals 3	['decimals', 'declaims', 'medicals']
+
+declines 3	['declines', 'licensed', 'silenced']
+
+deforest 3	['deforest', 'forested', 'fostered']
+
+delivers 3	['delivers', 'silvered', 'slivered']
+
+deranges 3	['deranges', 'grandees', 'grenades']
+
+designer 3	['designer', 'redesign', 'resigned']
+
+desiring 3	['desiring', 'residing', 'ringside']
+
+doubters 3	['doubters', 'obtrudes', 'redoubts']
+
+dourness 3	['dourness', 'resounds', 'sounders']
+
+enlarges 3	['enlarges', 'generals', 'gleaners']
+
+enlisted 3	['enlisted', 'listened', 'tinseled']
+
+entrails 3	['entrails', 'latrines', 'ratlines']
+
+estrange 4	['estrange', 'grantees', 'reagents', 'sergeant']
+
+gelatins 3	['gelatins', 'genitals', 'stealing']
+
+gentiles 3	['gentiles', 'sleeting', 'steeling']
+
+gentries 3	['gentries', 'integers', 'steering']
+
+hassling 3	['hassling', 'lashings', 'slashing']
+
+imposers 3	['imposers', 'promises', 'semipros']
+
+inserted 4	['inserted', 'nerdiest', 'resident', 'trendies']
+
+iterates 4	['iterates', 'teariest', 'treaties', 'treatise']
+
+lameness 4	['lameness', 'maleness', 'nameless', 'salesmen']
+
+layering 3	['layering', 'relaying', 'yearling']
+
+leeriest 3	['leeriest', 'sleetier', 'steelier']
+
+lighters 3	['lighters', 'relights', 'slighter']
+
+listener 3	['listener', 'reenlist', 'silenter']
+
+magnetos 3	['magnetos', 'megatons', 'montages']
+
+mangiest 3	['mangiest', 'mintages', 'steaming']
+
+mantissa 3	['mantissa', 'satanism', 'staminas']
+
+outtakes 3	['outtakes', 'stakeout', 'takeouts']
+
+painters 4	['painters', 'pantries', 'pertains', 'repaints']
+
+parental 3	['parental', 'paternal', 'prenatal']
+
+parroted 4	['parroted', 'predator', 'prorated', 'teardrop']
+
+pastries 5	['pastries', 'piasters', 'piastres', 'raspiest', 'traipses']
+
+pertness 3	['pertness', 'presents', 'serpents']
+
+platters 3	['platters', 'prattles', 'splatter']
+
+postured 3	['postured', 'proudest', 'sprouted']
+
+printers 3	['printers', 'reprints', 'sprinter']
+
+resistor 3	['resistor', 'roisters', 'sorriest']
+
+respects 5	['respects', 'scepters', 'sceptres', 'specters', 'spectres']
+
+restrain 5	['restrain', 'retrains', 'strainer', 'terrains', 'trainers']
+
+roundest 3	['roundest', 'tonsured', 'unsorted']
+
+stickler 3	['stickler', 'ticklers', 'trickles']
+
+stumbler 3	['stumbler', 'tumblers', 'tumbrels']
+
+swindles 3	['swindles', 'wildness', 'windless']
+
+thickest 3	['thickest', 'thickets', 'thickset']
+

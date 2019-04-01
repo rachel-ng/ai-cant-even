@@ -1,0 +1,270 @@
+abed 3	['abed', 'bade', 'bead']
+
+abet 4	['abet', 'bate', 'beat', 'beta']
+
+abut 3	['abut', 'tabu', 'tuba']
+
+acme 3	['acme', 'came', 'mace']
+
+acre 3	['acre', 'care', 'race']
+
+acts 4	['acts', 'cast', 'cats', 'scat']
+
+aids 3	['aids', 'dais', 'said']
+
+albs 3	['albs', 'labs', 'slab']
+
+ales 4	['ales', 'leas', 'sale', 'seal']
+
+alit 3	['alit', 'tail', 'tali']
+
+alms 3	['alms', 'lams', 'slam']
+
+alps 4	['alps', 'laps', 'pals', 'slap']
+
+amen 4	['amen', 'mane', 'mean', 'name']
+
+anew 3	['anew', 'wane', 'wean']
+
+ankh 3	['ankh', 'hank', 'khan']
+
+apes 3	['apes', 'apse', 'peas']
+
+arcs 3	['arcs', 'cars', 'scar']
+
+ares 5	['ares', 'ears', 'eras', 'sear', 'sera']
+
+arms 3	['arms', 'mars', 'rams']
+
+arts 5	['arts', 'rats', 'star', 'tars', 'tsar']
+
+ashy 3	['ashy', 'hays', 'shay']
+
+asps 4	['asps', 'pass', 'saps', 'spas']
+
+awls 3	['awls', 'laws', 'slaw']
+
+awns 3	['awns', 'sawn', 'swan']
+
+ayes 3	['ayes', 'easy', 'yeas']
+
+bard 3	['bard', 'brad', 'drab']
+
+bare 3	['bare', 'bear', 'brae']
+
+bast 4	['bast', 'bats', 'stab', 'tabs']
+
+brag 3	['brag', 'garb', 'grab']
+
+bros 3	['bros', 'orbs', 'robs']
+
+buns 3	['buns', 'nubs', 'snub']
+
+bust 3	['bust', 'stub', 'tubs']
+
+cams 3	['cams', 'macs', 'scam']
+
+dale 4	['dale', 'deal', 'lade', 'lead']
+
+dame 3	['dame', 'made', 'mead']
+
+dare 3	['dare', 'dear', 'read']
+
+deli 3	['deli', 'idle', 'lied']
+
+demo 3	['demo', 'dome', 'mode']
+
+dens 3	['dens', 'ends', 'send']
+
+dies 3	['dies', 'ides', 'side']
+
+diet 4	['diet', 'edit', 'tide', 'tied']
+
+disk 3	['disk', 'kids', 'skid']
+
+doer 3	['doer', 'redo', 'rode']
+
+does 3	['does', 'dose', 'odes']
+
+dohs 3	['dohs', 'hods', 'shod']
+
+door 3	['door', 'odor', 'rood']
+
+dues 3	['dues', 'sued', 'used']
+
+east 6	['east', 'eats', 'etas', 'sate', 'seat', 'teas']
+
+eels 3	['eels', 'else', 'lees']
+
+elan 3	['elan', 'lane', 'lean']
+
+emir 3	['emir', 'mire', 'rime']
+
+emit 4	['emit', 'item', 'mite', 'time']
+
+eons 4	['eons', 'noes', 'nose', 'ones']
+
+ergo 4	['ergo', 'goer', 'gore', 'ogre']
+
+evil 4	['evil', 'live', 'veil', 'vile']
+
+ewer 3	['ewer', 'weer', 'were']
+
+fart 3	['fart', 'frat', 'raft']
+
+fate 3	['fate', 'feat', 'feta']
+
+file 3	['file', 'lief', 'life']
+
+fist 3	['fist', 'fits', 'sift']
+
+flow 3	['flow', 'fowl', 'wolf']
+
+gals 3	['gals', 'lags', 'slag']
+
+gash 3	['gash', 'hags', 'shag']
+
+gins 3	['gins', 'sign', 'sing']
+
+girt 3	['girt', 'grit', 'trig']
+
+gnus 4	['gnus', 'guns', 'snug', 'sung']
+
+gory 3	['gory', 'gyro', 'orgy']
+
+gums 3	['gums', 'mugs', 'smug']
+
+gust 3	['gust', 'guts', 'tugs']
+
+hams 3	['hams', 'mash', 'sham']
+
+hare 3	['hare', 'hear', 'rhea']
+
+hast 3	['hast', 'hats', 'shat']
+
+hips 3	['hips', 'phis', 'ship']
+
+hist 4	['hist', 'hits', 'shit', 'this']
+
+hoes 3	['hoes', 'hose', 'shoe']
+
+hops 3	['hops', 'posh', 'shop']
+
+host 3	['host', 'hots', 'shot']
+
+huts 4	['huts', 'shut', 'thus', 'tush']
+
+inks 3	['inks', 'sink', 'skin']
+
+ires 3	['ires', 'rise', 'sire']
+
+isle 3	['isle', 'leis', 'lies']
+
+kale 3	['kale', 'lake', 'leak']
+
+keep 3	['keep', 'peek', 'peke']
+
+lair 5	['lair', 'liar', 'lira', 'rail', 'rial']
+
+lame 3	['lame', 'male', 'meal']
+
+last 3	['last', 'salt', 'slat']
+
+late 3	['late', 'tale', 'teal']
+
+lave 4	['lave', 'vale', 'veal', 'vela']
+
+leap 4	['leap', 'pale', 'peal', 'plea']
+
+lips 3	['lips', 'lisp', 'slip']
+
+list 3	['list', 'silt', 'slit']
+
+loop 3	['loop', 'polo', 'pool']
+
+lops 3	['lops', 'pols', 'slop']
+
+lose 4	['lose', 'oles', 'sloe', 'sole']
+
+lost 3	['lost', 'lots', 'slot']
+
+lows 3	['lows', 'owls', 'slow']
+
+mast 3	['mast', 'mats', 'tams']
+
+mate 4	['mate', 'meat', 'tame', 'team']
+
+meet 3	['meet', 'mete', 'teem']
+
+mesa 3	['mesa', 'same', 'seam']
+
+most 3	['most', 'mots', 'toms']
+
+nags 3	['nags', 'sang', 'snag']
+
+nape 3	['nape', 'neap', 'pane']
+
+naps 4	['naps', 'pans', 'snap', 'span']
+
+nest 4	['nest', 'nets', 'sent', 'tens']
+
+nevi 3	['nevi', 'vein', 'vine']
+
+news 3	['news', 'sewn', 'wens']
+
+nips 4	['nips', 'pins', 'snip', 'spin']
+
+nits 3	['nits', 'snit', 'tins']
+
+nope 4	['nope', 'open', 'peon', 'pone']
+
+nows 4	['nows', 'owns', 'snow', 'sown']
+
+nuts 3	['nuts', 'stun', 'tuns']
+
+oils 4	['oils', 'silo', 'soil', 'soli']
+
+opes 3	['opes', 'peso', 'pose']
+
+opts 6	['opts', 'post', 'pots', 'spot', 'stop', 'tops']
+
+ores 4	['ores', 'roes', 'rose', 'sore']
+
+pare 4	['pare', 'pear', 'rape', 'reap']
+
+pars 4	['pars', 'raps', 'rasp', 'spar']
+
+part 4	['part', 'rapt', 'tarp', 'trap']
+
+past 4	['past', 'pats', 'spat', 'taps']
+
+pate 3	['pate', 'peat', 'tape']
+
+paws 3	['paws', 'swap', 'wasp']
+
+pays 3	['pays', 'spay', 'yaps']
+
+pest 3	['pest', 'pets', 'step']
+
+piss 3	['piss', 'psis', 'sips']
+
+pits 3	['pits', 'spit', 'tips']
+
+rate 3	['rate', 'tare', 'tear']
+
+riot 3	['riot', 'tiro', 'trio']
+
+rite 3	['rite', 'tier', 'tire']
+
+rots 3	['rots', 'sort', 'tors']
+
+rues 4	['rues', 'ruse', 'sure', 'user']
+
+stew 3	['stew', 'west', 'wets']
+
+stow 4	['stow', 'tows', 'twos', 'wost']
+
+swat 3	['swat', 'twas', 'wast']
+
+sway 3	['sway', 'ways', 'yaws']
+

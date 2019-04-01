@@ -1,0 +1,384 @@
+abets 6	['abets', 'baste', 'bates', 'beast', 'beats', 'betas']
+
+abler 4	['abler', 'baler', 'blare', 'blear']
+
+abuts 3	['abuts', 'tabus', 'tubas']
+
+acres 4	['acres', 'cares', 'races', 'scare']
+
+adder 3	['adder', 'dared', 'dread']
+
+admen 4	['admen', 'amend', 'maned', 'named']
+
+aides 3	['aides', 'aside', 'ideas']
+
+aimed 3	['aimed', 'amide', 'media']
+
+alert 3	['alert', 'alter', 'later']
+
+angel 3	['angel', 'angle', 'glean']
+
+angst 3	['angst', 'gnats', 'tangs']
+
+ankhs 4	['ankhs', 'hanks', 'khans', 'shank']
+
+antis 4	['antis', 'saint', 'satin', 'stain']
+
+antsy 3	['antsy', 'nasty', 'tansy']
+
+apter 3	['apter', 'prate', 'taper']
+
+arced 5	['arced', 'cadre', 'cared', 'cedar', 'raced']
+
+argon 3	['argon', 'groan', 'organ']
+
+argot 3	['argot', 'gator', 'groat']
+
+arson 3	['arson', 'roans', 'sonar']
+
+artsy 4	['artsy', 'satyr', 'stray', 'trays']
+
+ascot 4	['ascot', 'coast', 'coats', 'tacos']
+
+aspen 4	['aspen', 'napes', 'neaps', 'panes']
+
+asset 4	['asset', 'easts', 'sates', 'seats']
+
+aster 5	['aster', 'rates', 'stare', 'tares', 'tears']
+
+astir 5	['astir', 'sitar', 'stair', 'stria', 'tarsi']
+
+avers 3	['avers', 'raves', 'saver']
+
+baker 3	['baker', 'brake', 'break']
+
+bales 3	['bales', 'blase', 'sable']
+
+bards 3	['bards', 'brads', 'drabs']
+
+bared 4	['bared', 'beard', 'bread', 'debar']
+
+bares 6	['bares', 'baser', 'bears', 'braes', 'saber', 'sabre']
+
+begin 3	['begin', 'being', 'binge']
+
+below 3	['below', 'bowel', 'elbow']
+
+boast 3	['boast', 'boats', 'sabot']
+
+bores 3	['bores', 'robes', 'sober']
+
+brags 3	['brags', 'garbs', 'grabs']
+
+brief 3	['brief', 'fiber', 'fibre']
+
+brute 3	['brute', 'rebut', 'tuber']
+
+calks 3	['calks', 'lacks', 'slack']
+
+caner 3	['caner', 'crane', 'nacre']
+
+canst 3	['canst', 'cants', 'scant']
+
+caper 4	['caper', 'crape', 'pacer', 'recap']
+
+capes 3	['capes', 'paces', 'space']
+
+caret 6	['caret', 'cater', 'crate', 'react', 'recta', 'trace']
+
+carps 4	['carps', 'craps', 'scarp', 'scrap']
+
+chore 3	['chore', 'ocher', 'ochre']
+
+cider 3	['cider', 'cried', 'riced']
+
+claps 3	['claps', 'clasp', 'scalp']
+
+clods 3	['clods', 'colds', 'scold']
+
+coder 4	['coder', 'cored', 'credo', 'decor']
+
+coins 4	['coins', 'icons', 'scion', 'sonic']
+
+cones 3	['cones', 'onces', 'scone']
+
+copes 3	['copes', 'copse', 'scope']
+
+cruel 3	['cruel', 'lucre', 'ulcer']
+
+cruet 4	['cruet', 'cuter', 'eruct', 'truce']
+
+cruse 4	['cruse', 'cures', 'curse', 'ecrus']
+
+dales 4	['dales', 'deals', 'lades', 'leads']
+
+darer 3	['darer', 'drear', 'rared']
+
+dares 3	['dares', 'dears', 'reads']
+
+dater 5	['dater', 'rated', 'tared', 'trade', 'tread']
+
+dates 3	['dates', 'sated', 'stead']
+
+deist 5	['deist', 'diets', 'edits', 'sited', 'tides']
+
+delis 4	['delis', 'idles', 'sidle', 'slide']
+
+demos 3	['demos', 'domes', 'modes']
+
+dinar 3	['dinar', 'drain', 'nadir']
+
+direr 3	['direr', 'drier', 'rider']
+
+diver 3	['diver', 'drive', 'rived']
+
+doles 3	['doles', 'lodes', 'soled']
+
+doors 3	['doors', 'odors', 'roods']
+
+doper 3	['doper', 'pored', 'roped']
+
+dowry 3	['dowry', 'rowdy', 'wordy']
+
+drape 4	['drape', 'padre', 'pared', 'raped']
+
+draws 3	['draws', 'sward', 'wards']
+
+dries 3	['dries', 'rides', 'sired']
+
+drupe 3	['drupe', 'duper', 'prude']
+
+early 3	['early', 'layer', 'relay']
+
+earns 4	['earns', 'nears', 'saner', 'snare']
+
+earth 3	['earth', 'hater', 'heart']
+
+elans 3	['elans', 'lanes', 'leans']
+
+elver 3	['elver', 'lever', 'revel']
+
+emirs 4	['emirs', 'mires', 'miser', 'rimes']
+
+emits 5	['emits', 'items', 'mites', 'smite', 'times']
+
+ester 5	['ester', 'reset', 'steer', 'terse', 'trees']
+
+ether 3	['ether', 'there', 'three']
+
+euros 3	['euros', 'roues', 'rouse']
+
+evils 3	['evils', 'lives', 'veils']
+
+ewers 3	['ewers', 'resew', 'sewer']
+
+false 3	['false', 'fleas', 'leafs']
+
+fares 3	['fares', 'fears', 'safer']
+
+farts 3	['farts', 'frats', 'rafts']
+
+fates 4	['fates', 'feast', 'feats', 'fetas']
+
+field 3	['field', 'filed', 'flied']
+
+filer 4	['filer', 'flier', 'lifer', 'rifle']
+
+firer 3	['firer', 'frier', 'rifer']
+
+fires 3	['fires', 'fries', 'serif']
+
+flows 3	['flows', 'fowls', 'wolfs']
+
+gears 4	['gears', 'rages', 'sager', 'sarge']
+
+girts 4	['girts', 'grist', 'grits', 'trigs']
+
+glare 4	['glare', 'lager', 'large', 'regal']
+
+goers 4	['goers', 'gores', 'gorse', 'ogres']
+
+grips 3	['grips', 'prigs', 'sprig']
+
+hales 4	['hales', 'heals', 'leash', 'shale']
+
+halts 3	['halts', 'laths', 'shalt']
+
+hares 5	['hares', 'hears', 'rheas', 'share', 'shear']
+
+haste 3	['haste', 'hates', 'heats']
+
+heaps 3	['heaps', 'phase', 'shape']
+
+heirs 4	['heirs', 'hires', 'shier', 'shire']
+
+helot 3	['helot', 'hotel', 'thole']
+
+herds 3	['herds', 'sherd', 'shred']
+
+heros 4	['heros', 'hoers', 'horse', 'shore']
+
+hoots 3	['hoots', 'shoot', 'sooth']
+
+idols 3	['idols', 'lidos', 'solid']
+
+inert 4	['inert', 'inter', 'niter', 'nitre']
+
+inset 4	['inset', 'nites', 'stein', 'tines']
+
+islet 3	['islet', 'stile', 'tiles']
+
+kales 4	['kales', 'lakes', 'leaks', 'slake']
+
+keels 3	['keels', 'leeks', 'sleek']
+
+keeps 3	['keeps', 'peeks', 'pekes']
+
+kepis 3	['kepis', 'pikes', 'spike']
+
+kilns 3	['kilns', 'links', 'slink']
+
+lairs 5	['lairs', 'liars', 'liras', 'rails', 'rials']
+
+lames 3	['lames', 'males', 'meals']
+
+lamps 3	['lamps', 'palms', 'psalm']
+
+lapse 6	['lapse', 'leaps', 'pales', 'peals', 'pleas', 'sepal']
+
+lasts 3	['lasts', 'salts', 'slats']
+
+laves 5	['laves', 'salve', 'slave', 'vales', 'veals']
+
+leapt 5	['leapt', 'lepta', 'petal', 'plate', 'pleat']
+
+least 6	['least', 'slate', 'stale', 'steal', 'tales', 'teals']
+
+lilts 3	['lilts', 'still', 'tills']
+
+limes 4	['limes', 'miles', 'slime', 'smile']
+
+lists 3	['lists', 'silts', 'slits']
+
+liter 4	['liter', 'litre', 'relit', 'tiler']
+
+loops 5	['loops', 'polos', 'pools', 'sloop', 'spool']
+
+loots 3	['loots', 'stool', 'tools']
+
+lopes 3	['lopes', 'poles', 'slope']
+
+lores 3	['lores', 'loser', 'roles']
+
+loses 3	['loses', 'sloes', 'soles']
+
+loves 3	['loves', 'solve', 'voles']
+
+lumps 3	['lumps', 'plums', 'slump']
+
+manes 4	['manes', 'manse', 'means', 'names']
+
+mares 4	['mares', 'maser', 'reams', 'smear']
+
+marts 3	['marts', 'smart', 'trams']
+
+mates 5	['mates', 'meats', 'steam', 'tames', 'teams']
+
+meets 3	['meets', 'metes', 'teems']
+
+merit 5	['merit', 'miter', 'mitre', 'remit', 'timer']
+
+motes 3	['motes', 'smote', 'tomes']
+
+nails 3	['nails', 'slain', 'snail']
+
+notes 5	['notes', 'onset', 'steno', 'stone', 'tones']
+
+opens 3	['opens', 'peons', 'pones']
+
+optic 3	['optic', 'picot', 'topic']
+
+outer 3	['outer', 'outre', 'route']
+
+overs 4	['overs', 'roves', 'servo', 'verso']
+
+overt 3	['overt', 'trove', 'voter']
+
+paled 3	['paled', 'pedal', 'plead']
+
+palsy 3	['palsy', 'plays', 'splay']
+
+panel 3	['panel', 'penal', 'plane']
+
+pares 7	['pares', 'parse', 'pears', 'rapes', 'reaps', 'spare', 'spear']
+
+parts 5	['parts', 'sprat', 'strap', 'tarps', 'traps']
+
+paste 6	['paste', 'pates', 'peats', 'septa', 'spate', 'tapes']
+
+peaks 3	['peaks', 'spake', 'speak']
+
+pelts 3	['pelts', 'slept', 'spelt']
+
+penis 4	['penis', 'pines', 'snipe', 'spine']
+
+pesos 3	['pesos', 'poses', 'posse']
+
+piers 4	['piers', 'pries', 'prise', 'spire']
+
+piles 3	['piles', 'plies', 'spiel']
+
+pinto 3	['pinto', 'piton', 'point']
+
+pores 5	['pores', 'poser', 'prose', 'ropes', 'spore']
+
+ports 3	['ports', 'sport', 'strop']
+
+posts 3	['posts', 'spots', 'stops']
+
+pouts 3	['pouts', 'spout', 'stoup']
+
+prays 3	['prays', 'raspy', 'spray']
+
+reins 5	['reins', 'resin', 'rinse', 'risen', 'siren']
+
+rents 3	['rents', 'stern', 'terns']
+
+resow 4	['resow', 'sower', 'swore', 'worse']
+
+riots 4	['riots', 'tiros', 'torsi', 'trios']
+
+rites 4	['rites', 'tiers', 'tires', 'tries']
+
+roast 3	['roast', 'sorta', 'taros']
+
+roost 3	['roost', 'roots', 'torso']
+
+roust 3	['roust', 'routs', 'tours']
+
+serve 4	['serve', 'sever', 'veers', 'verse']
+
+sewed 3	['sewed', 'swede', 'weeds']
+
+shout 3	['shout', 'south', 'thous']
+
+sinew 3	['sinew', 'swine', 'wines']
+
+skate 5	['skate', 'stake', 'steak', 'takes', 'teaks']
+
+state 3	['state', 'taste', 'teats']
+
+swath 3	['swath', 'thaws', 'whats']
+
+swear 3	['swear', 'wares', 'wears']
+
+tater 3	['tater', 'tetra', 'treat']
+
+throw 3	['throw', 'worth', 'wroth']
+
+trows 3	['trows', 'worst', 'worts']
+
+weird 3	['weird', 'wider', 'wired']
+
+weirs 3	['weirs', 'wires', 'wiser']
+
