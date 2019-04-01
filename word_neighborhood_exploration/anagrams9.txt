@@ -1,0 +1,34 @@
+accouters 3	['accouters', 'accoutres', 'coruscate']
+
+adsorbing 3	['adsorbing', 'boardings', 'signboard']
+
+assorting 3	['assorting', 'organists', 'roastings']
+
+auctioned 3	['auctioned', 'cautioned', 'education']
+
+beastlier 3	['beastlier', 'bleariest', 'liberates']
+
+cattiness 3	['cattiness', 'scantiest', 'tacitness']
+
+countries 3	['countries', 'cretinous', 'neurotics']
+
+cratering 3	['cratering', 'retracing', 'terracing']
+
+dissenter 3	['dissenter', 'residents', 'tiredness']
+
+earthling 3	['earthling', 'haltering', 'lathering']
+
+emigrants 3	['emigrants', 'mastering', 'streaming']
+
+enlisting 3	['enlisting', 'listening', 'tinseling']
+
+erections 3	['erections', 'resection', 'secretion']
+
+estranges 3	['estranges', 'greatness', 'sergeants']
+
+intaglios 3	['intaglios', 'isolating', 'ligations']
+
+mutilates 3	['mutilates', 'stimulate', 'ultimates']
+
+reprising 3	['reprising', 'respiring', 'springier']
+
