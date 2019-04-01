@@ -1,0 +1,10 @@
+dentitions 3	['dentitions', 'distention', 'tendonitis']
+
+discounter 3	['discounter', 'introduces', 'reductions']
+
+insinuator 3	['insinuator', 'ruinations', 'urinations']
+
+misaligned 3	['misaligned', 'misdealing', 'misleading']
+
+persistent 3	['persistent', 'pinsetters', 'prettiness']
+
