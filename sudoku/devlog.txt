@@ -20,10 +20,23 @@ rachelN -- 2019-04-02 14:22
 	1 2 3
 	4 5 6
 	7 8 9 
-    - option 2
-        - line 14 -- option 2
+
+
+rachelN -- 2019-04-09 10:54 
+[stack.py]
+- Stack(size=100) [fin]
+    - can preallocate spaces 
+    - push(data)
+    - pop()
+    - peek()
+    - stack() - see entire stack
+
+rachelN -- 2019-04-10 23:54 
+[s.py]
+- finding the rows and columns that don't contain certain numbers option 2 (electric boogaloo)
+    - line 14 -- option 2
         rec_2 = dict([[i,[set([]),set([])]] for i in range(10)[1:]])
-        - line 20 -- option 2
+    - line 20 -- option 2
         r = 0
         while r < 9:
             c = 0
@@ -41,19 +54,9 @@ rachelN -- 2019-04-02 14:22
                     print(squares,"\n",squares[box],"\n",squares[box][r % 3],"\n",squares[box][r % 3][c % 3])
                 c += 1
             r += 1
-        - line 44 -- option 2
+    - line 44 -- option 2
         for i in rec:
             rec_2[i][0] = list(set(range(9)) - rec_2[i][0])
             rec_2[i][1] = list(set(range(9)) - rec_2[i][1])
             rec_2[i][0].sort()
             rec_2[i][1].sort()
-
-rachelN -- 2019-04-09 10:54 
-[stack.py]
-- Stack(size=100) [fin]
-    - can preallocate spaces 
-    - push(data)
-    - pop()
-    - peek()
-    - stack() - see entire stack
-
