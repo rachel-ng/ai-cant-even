@@ -1,5 +1,6 @@
 #!/usr/bin/python
 import sys
+from datetime import datetime
 
 def OrdinaryComparison(a,b):
     if a < b: return -1
@@ -177,7 +178,11 @@ def wordladder (in_f,out_f):
 
 
 if __name__ == "__main__":
+    start = datetime.now()
     wordladder(sys.argv[1], sys.argv[2])
+    print (datetime.now()-start)
+
+
     #print("\n\n\n")
 
     #python3 neighbors.py  harry.txt  answers.txt

@@ -176,10 +176,13 @@ def wordladder (in_f,out_f):
 
 if __name__ == "__main__":
     #wordladder(sys.argv[1], sys.argv[2])
-    n = 8
+    n = 5
     d = dctnry(n)
     #print(d)
     s = ""
+
+    place = dict([[i, set([])] for i in "abcdefghijklmnopqrstuvwxyz"])
+
 
     searched = set()
     for i in d:
@@ -201,6 +204,8 @@ if __name__ == "__main__":
     o_file = open("anagrams" + str(n) + ".txt", "w+")
     o_file.write(s)
     o_file.close()
+
+    print (place)
 
     #python3 neighbors.py  harry.txt  answers.txt
     #python3 neighbors.py doublets.txt adfjkls.txt
