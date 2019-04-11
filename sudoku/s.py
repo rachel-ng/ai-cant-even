@@ -12,7 +12,6 @@ def s_board (in_f):
         print (i)
 
     rec = dict([[i,[[0] * 9,[0] * 9]] for i in range(10)[1:]])
-    #rec_2 = dict([[i,[set([]),set([])]] for i in range(10)[1:]])
     possible = dict([[i,[[],[]]] for i in range(10)[1:]])
     squares =  dict([[i,[[0] * 3,[0] * 3,[0] * 3]] for i in range(10)[1:]])
     #print(possible)
@@ -28,13 +27,7 @@ def s_board (in_f):
             if n > 0:
                 rec[n][0][r] = n
                 rec[n][1][c] = n
-                #rec_2[n][0].add(r)
-                #rec_2[n][1].add(c)
-                #print("\n")
-                #print(n,"\t",box, r % 3, c % 3)
-                #print(r % 3,c%3)
                 squares[box][r % 3][c % 3] = n
-                #print(squares,"\n",squares[box],"\n",squares[box][r % 3],"\n",squares[box][r % 3][c % 3])
             c += 1
         r += 1
 
@@ -48,15 +41,10 @@ def s_board (in_f):
     for i in board:
         print (i)
     for i in rec:
-        # rec_2[i][0] = list(set(range(9)) - rec_2[i][0])
-        # rec_2[i][1] = list(set(range(9)) - rec_2[i][1])
-        # rec_2[i][0].sort()
-        # rec_2[i][1].sort()
         possible[i][0] =  [n for n,p in enumerate(rec[i][0],0) if p == 0]#r
         possible[i][1] =  [n for n,p in enumerate(rec[i][1],0) if p == 0]#c
 
     print("rec",rec)
-    #print(rec_2)
     print("possible",possible)
     #print(possible == rec_2)
     print("squares",squares)
