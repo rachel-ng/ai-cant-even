@@ -219,6 +219,15 @@ def diffLetters(first, second):
 
     return counter
 
+'''
+My modification was changing how he created the dictionary of similar words (aka the pre-wordladder assignment) because that was taking about 8s
+(8s on my laptop, using datetime — for context, his program runs in about 10s)
+
+Not entirely sure if this counts because it replaces a large chunk of his code (7 lines -> 10 lines with pretty heavy list + set comprehensions), but it is a modification of a single part of his program
+
+My (actual) code begins at line 225 (with some comments starting at line 222). I've included some notes beginning at line 240 as well as the other code mentioned (commented out)
+'''
+
 # 0:00:00.132315 ~0m1.8s
 # start = datetime.now()
 # CHANGES BEGIN HERE
