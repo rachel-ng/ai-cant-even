@@ -45,36 +45,22 @@ def s_board (in_f):
 
     print(empty)
 
-    r = dict([[n,[board[k] for k in i]]
-              for n,i in enumerate(cliques_r)])
-    c = dict([[n,[board[k] for k in i]]
-              for n,i in enumerate(cliques_c)])
-    s = dict([[n,[board[k] for k in i]]
-              for n,i in enumerate(cliques_s)])
+    # k = rs * 9 + cs
+    r = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_r)]) # n // 9
+    c = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_c)]) # n % 9
+    s = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_s)]) # (rs // 3) * 3 + (cs // 3)
 
     print(r)
     print(c)
     print(s)
 
-    w = 0
     for n,p in enumerate(board):
-        print(n,p)
-        rs = n // 9#n // 9 +  1
-        cs = n % 9#n // 3 +c 1
+        #print(n,p)
+        rs = n // 9
+        cs = n % 9
         box = (rs // 3) * 3 + (cs // 3)
         pos = rs * 9 + cs
-        print(board[pos])
-        print(p == board[pos])
-        if p != board[pos]: w += 1
-        print(rs,cs,box,pos)
-        print(p in r[rs])
-        print(p in c[cs])
-        print(p in s[box])
-        print((n + 1) % 9)
-        print((n + 1) % 3)
-        print("\n")
 
-    print(w)
 
 
 if __name__ == "__main__":
