@@ -40,9 +40,9 @@ def s_board (in_f):
     i_file.close()
     board = [int(n) if n != '_' else 0 for i in input_f for n in i]
     empty = [n for n,p in enumerate(board) if p == 0]
+
     print(board)
     print(len(board))
-
     print(empty)
 
     # k = rs * 9 + cs
