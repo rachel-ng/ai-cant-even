@@ -59,7 +59,7 @@ def s_board (in_f):
     input_f = [line.strip().split(",") for line in i_file]
     i_file.close()
 
-    stck = Stack()
+    stacked = Stack()
 
     board = [int(n) if n != '_' else 0 for i in input_f for n in i]
     empty = [n for n,p in enumerate(board) if p == 0]
@@ -79,7 +79,7 @@ def s_board (in_f):
     print("s\n",s)
 
     for i in empty:
-        print(i)
+        #print(i)
         rs, cs, ss = coords(i)
         pos_r = set(vals[:]) - set(r[rs])
         pos_c = set(vals[:]) - set(c[cs])
@@ -88,28 +88,26 @@ def s_board (in_f):
         # print(cs, c[cs], set(vals[:]) - set(c[cs]))
         # print(ss, s[ss], set(vals[:]) - set(s[ss]))
         pos_each = pos_r & pos_c & pos_s
-        print(len(pos_each),"\t", pos_each)
-        print("")
+        #print(len(pos_each),"\t", pos_each)
         possible[i] = pos_each
 
     for i in possible:
         if len(possible[i]) == 1:
             rs, cs, ss = coords(i)
             #board[i] = list(possible[i])[0]
-            print("place in sqaure",(rs % 3) * 3 + (cs % 3))
-            print(rs,cs,ss)
-            print(s[ss])
-            print(cliques_s[ss])
+            #print("place in sqaure",(rs % 3) * 3 + (cs % 3))
+            #print(rs,cs,ss)
+            #print(cliques_s[ss])
+            #print(s[ss])
             update_b (i, possible[i].pop(), board, r, c, s)
-            print(s[ss])
-            print(cliques_s[ss])
-            stck.push([i,board[:]])
+            #print(s[ss])
+            stacked.push([i,board[:]])
             possible[i] = None
-            print (i,"\t")
+            #print (i,"\t\n")
 
     print("\nstack")
 
-    print(stck)
+    print(stacked)
     print(possible)
     #if sum(board) == 1215:
     #    True
