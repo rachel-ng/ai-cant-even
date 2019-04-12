@@ -33,7 +33,7 @@ cliques_s = [[0,1,2,9,10,11,18,19,20],[3,4,5,12,13,14,21,22,23],
 [6,7,8,15,16,17,24,25,26],[27,28,29,36,37,38,45,46,47],[30,31,32,39,40,41,48,49,50],[33,34,35,42,43,44,51,52,53],[54,55,56,63,64,65,72,73,74],[57,58,59,66,67,68,75,76,77],[60,61,62,69,70,71,78,79,80]]
 
 def s_board (in_f):
-    vals = set([1,2,3,4,5,6,7,8,9])
+    vals = [1,2,3,4,5,6,7,8,9]
 
     i_file = open(in_f,"r")
     input_f = [line.strip().split(",") for line in i_file]
@@ -50,17 +50,20 @@ def s_board (in_f):
     c = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_c)]) # n % 9
     s = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_s)]) # (rs // 3) * 3 + (cs // 3)
 
+    for i in empty:
+        print(i)
+        rs = i // 9
+        cs = i % 9
+        ss = (rs // 3) * 3 + (cs // 3)
+        pos = rs * 9 + cs
+        print(rs, r[rs], set(vals[:]) - set(r[rs]))
+        print(cs, c[cs], set(vals[:]) - set(c[cs]))
+        print(ss, s[ss], set(vals[:]) - set(s[ss]))
+        print("")
+
     print(r)
     print(c)
     print(s)
-
-    for n,p in enumerate(board):
-        #print(n,p)
-        rs = n // 9
-        cs = n % 9
-        box = (rs // 3) * 3 + (cs // 3)
-        pos = rs * 9 + cs
-
 
 
 if __name__ == "__main__":
