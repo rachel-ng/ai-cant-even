@@ -56,9 +56,15 @@ def s_board (in_f):
         cs = i % 9
         ss = (rs // 3) * 3 + (cs // 3)
         pos = rs * 9 + cs
+        pos_r = set(vals[:]) - set(r[rs])
+        pos_c = set(vals[:]) - set(c[cs])
+        pos_s = set(vals[:]) - set(s[ss])
         print(rs, r[rs], set(vals[:]) - set(r[rs]))
         print(cs, c[cs], set(vals[:]) - set(c[cs]))
         print(ss, s[ss], set(vals[:]) - set(s[ss]))
+        pos_each = pos_r & pos_c & pos_s
+        print(pos_each)
+        print(len(pos_each))
         print("")
 
     print(r)
