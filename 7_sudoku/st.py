@@ -62,7 +62,7 @@ def s_board (in_f):
     stacked = Stack()
 
     board = [int(n) if n != '_' else 0 for i in input_f for n in i]
-    empty = [n for n,p in enumerate(board) if p == 0]
+    empty = set([n for n,p in enumerate(board) if p == 0])
     possible = dict([[i,None]for i in empty])
 
     print(board)
