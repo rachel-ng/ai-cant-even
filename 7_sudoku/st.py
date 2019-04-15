@@ -66,27 +66,6 @@ cliques_c = [[0,9,18,27,36,45,54,63,72],[1,10,19,28,37,46,55,64,73],[2,11,20,29,
 
 cliques_s = [[0,1,2,9,10,11,18,19,20],[3,4,5,12,13,14,21,22,23],[6,7,8,15,16,17,24,25,26],[27,28,29,36,37,38,45,46,47],[30,31,32,39,40,41,48,49,50],[33,34,35,42,43,44,51,52,53],[54,55,56,63,64,65,72,73,74],[57,58,59,66,67,68,75,76,77],[60,61,62,69,70,71,78,79,80]]
 
-def coords (n) :
-    r = n // 9 # row
-    c = n % 9 # col
-    s = (r // 3) * 3 + (c // 3) # square
-    s_pos = (r % 3) * 3 + (c % 3)
-    pos = r * 9 + c # calculate the original position
-    return r, c, s
-
-def update_b (p, val, board, r, c, s):
-    rs, cs, ss = coords(p)
-    board[p] = val
-    r[rs][cs] = val
-    c[cs][rs] = val
-    s[ss][(rs % 3) * 3 + (cs % 3)]
-
-def update_n (board):
-    r = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_r)]) # n // 9
-    c = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_c)]) # n % 9
-    s = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_s)]) # (rs // 3) * 3 + (cs // 3)
-    return r, c, s
-
 NEW_CELL = 0
 FIND_NEXT_CELL = 1
 BACKTRACK = 2
@@ -109,29 +88,15 @@ def s_board (in_f):
     print(len(board))
     print(empty)
 
-    # k = rs * 9 + cs
-    r = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_r)]) # n // 9
-    c = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_c)]) # n % 9
-    s = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_s)]) # (rs // 3) * 3 + (cs // 3)
-    all_c = dict([i,set([member for clique in cliques if i in clique for member in clique if member != i])] for i in range(81))
+    neighbors = dict([i,set([member for clique in cliques if i in clique for member in clique if member != i])] for i in range(81))
 
-
-
-    print(r)
-    print(c)
-    print(s)
     print("")
-    print(all_c)
+    print(neighbors)
     print("")
 
     for i in empty:
-        rs, cs, ss = coords(i)
-        pos_r = set(vals[:]) - set(r[rs])
-        pos_c = set(vals[:]) - set(c[cs])
-        pos_s = set(vals[:]) - set(s[ss])
-        pos_each = pos_r & pos_c & pos_s
-        possible[i] = pos_each
-        print(i, pos_each)
+        possible[i] = set(vals[:]) - set([board[k] for k in neighbors[i]])
+        print(i, possible[i])
 
    # for i in possible:
         #rs, cs, ss = coords(i)
@@ -163,7 +128,7 @@ def s_board (in_f):
         print(cell, board[cell])
         if state == NEW_CELL: # we're on a new open cell
             guess,forced = nextGuess(cell)
-            update_b (cell, guess, board, r, c, s)
+            board[cell] = guess
             print ("NEW_CELL,cell,guess,forced",cell,guess,forced)
             if not guess: # failed to find a valid guess for this cell, backtrack
                 state = BACKTRACK
