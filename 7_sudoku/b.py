@@ -2,55 +2,50 @@
 import sys
 
 class MyStack:
-    def __init__ (self, size=100):
-        self.size = 0 # self.size - 1 == index of item at position
-        self.list = [None] * size
+    def __init__(self,store_immediate_list = None):
+        self.storage = []
+        self.filled = 0
+        # if there's anything to store immediately, push all items in that list
+        if store_immediate_list:
+            for an_item in store_immediate_list:
+                self.push(an_item)
 
-    def __str__ (self):
-        s = ""
-        for i in self.stack():
-            s += str(i) + "\n"
-        return s
+    def size(self):
+        return self.filled
 
-    def push (self, data):
-        if self.size - 1 > len(self.list): self.stack + [data]
-        else: self.list[self.size] = data
-        self.size += 1
-
-    def pop (self):
-        if self.size < 1:
-            return None
+    def push(self,item):
+        if self.filled == len(self.storage):
+            self.storage.append(item)
         else:
-            popped, self.list[self.size - 1] = self.list[self.size - 1], None
-            self.size -= 1
-            return popped
+            self.storage[self.filled] = item
+        self.filled += 1
 
-    def peek(self):
-        return self.list[self.size - 1]
+    def pop(self):
+        if self.filled == 0:
+            return None
+        self.filled -= 1
+        return self.storage[self.filled]
 
-    def stack(self):
-        return self.list[:self.size]
+    def peek(self,where = 0):
+        if where >= 0:
+            if where >= self.filled:
+                return None
+            return self.storage[self.filled - 1 - where]
+        else:
+            where = -where
+            if where > self.filled:
+                return None
+            return self.storage[where-1]
 
-cliques_r = [[0,1,2,3,4,5,6,7,8],[9,10,11,12,13,14,15,16,17],[18,19,20,21,22,23,24,25,26],[27,28,29,30,31,32,33,34,35],[36,37,38,39,40,41,42,43,44],[45,46,47,48,49,50,51,52,53],[54,55,56,57,58,59,60,61,62],[63,64,65,66,67,68,69,70,71],[72,73,74,75,76,77,78,79,80]]
-
-cliques_c = [[0,9,18,27,36,45,54,63,72],[1,10,19,28,37,46,55,64,73],[2,11,20,29,38,47,56,65,74],[3,12,21,30,39,48,57,66,75],[4,13,22,31,40,49,58,67,76],[5,14,23,32,41,50,59,68,77],[6,15,24,33,42,51,60,69,78],[7,16,25,34,43,52,61,70,79],[8,17,26,35,44,53,62,71,80]]
-
-cliques_s = [[0,1,2,9,10,11,18,19,20],[3,4,5,12,13,14,21,22,23],[6,7,8,15,16,17,24,25,26],[27,28,29,36,37,38,45,46,47],[30,31,32,39,40,41,48,49,50],[33,34,35,42,43,44,51,52,53],[54,55,56,63,64,65,72,73,74],[57,58,59,66,67,68,75,76,77],[60,61,62,69,70,71,78,79,80]]
+cliques = [[[0,1,2,3,4,5,6,7,8],[9,10,11,12,13,14,15,16,17],[18,19,20,21,22,23,24,25,26],[27,28,29,30,31,32,33,34,35],[36,37,38,39,40,41,42,43,44],[45,46,47,48,49,50,51,52,53],[54,55,56,57,58,59,60,61,62],[63,64,65,66,67,68,69,70,71],[72,73,74,75,76,77,78,79,80]],[[0,9,18,27,36,45,54,63,72],[1,10,19,28,37,46,55,64,73],[2,11,20,29,38,47,56,65,74],[3,12,21,30,39,48,57,66,75],[4,13,22,31,40,49,58,67,76],[5,14,23,32,41,50,59,68,77],[6,15,24,33,42,51,60,69,78],[7,16,25,34,43,52,61,70,79],[8,17,26,35,44,53,62,71,80]],[[0,1,2,9,10,11,18,19,20],[3,4,5,12,13,14,21,22,23],[6,7,8,15,16,17,24,25,26],[27,28,29,36,37,38,45,46,47],[30,31,32,39,40,41,48,49,50],[33,34,35,42,43,44,51,52,53],[54,55,56,63,64,65,72,73,74],[57,58,59,66,67,68,75,76,77],[60,61,62,69,70,71,78,79,80]]]
 
 def coords (n) :
     r = n // 9 # row
     c = n % 9 # col
     s = (r // 3) * 3 + (c // 3) # square
-    s_pos = (r % 3) * 3 + (c % 3)
-    pos = r * 9 + c # calculate the original position
+    #s_pos = (r % 3) * 3 + (c % 3)
+    #pos = r * 9 + c # calculate the original position
     return r, c, s
-
-def update_b (p, val, board, r, c, s):
-    rs, cs, ss = coords(p)
-    board[p] = val
-    r[rs][cs] = val
-    c[cs][rs] = val
-    s[ss][(rs % 3) * 3 + (cs % 3)]
 
 # States
 NEW_CELL = 0
@@ -76,32 +71,35 @@ def getBoard(argv):
     n = argv[3].split(',')
     return n[0] + '-' + n[2], [n for i in boards[n[0] + '-' + n[2]] for n in i]
 
-def makeNeighbors(board):
-    global r, c, s
-    r = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_r)]) # n // 9
-    c = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_c)]) # n % 9
-    s = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_s)]) # (rs // 3) * 3 + (cs // 3)
-    return r, c, s
+def makeNeighbors():
+    global neighbors
+    d = {}
+    for i in range(81):
+        neighbors = set()
+        for clique in cliques:
+            if i in clique:
+                for clique_member in clique:
+                    if clique_member != i:
+                        neighbors.add(clique_member)
+        d[i] = neighbors
+    return d
+
 
 def nextOpenCell (board, start):
     try: return board.index(0, start+1)
     except ValueError: return None
 
-def coords (n) :
-    r = n // 9 # row
-    c = n % 9 # col
-    s = (r // 3) * 3 + (c // 3) # square
-    s_pos = (r % 3) * 3 + (c % 3)
-    pos = r * 9 + c # calculate the original position
-    return r, c, s
-
 def nextValidGuess(board, cell, start):
-    rs, cs, ss = coords(cell)
-    makeNeighbors(board)
-    pos = (AllVals - set(r[rs])) & (AllVals - set(c[cs])) & (AllVals - set(s[ss]))
-    while start in r[rs] or start in c[cs] or start in s[ss]: start+= 1
-    if start in AllVals:return start, len(pos) < 1
-    else: return False, False
+    neighbors_vals=  [board[neighbors] for neighbor in d[cell]]
+    while True:
+        if n in neighbors_vals:
+            n += 1
+            if n > 9:
+                n = None
+                break
+        else:
+            break
+    return n, False
 
 def printBoard(board):
     b = [[board[k] for k in i] for n,i in enumerate(cliques_r)]
@@ -111,11 +109,11 @@ def printBoard(board):
 def writeBoard(argv,name,board):
     o_file = open(argv[2], "w+")
     s = ""
-    n = 0
+
     for n,p in enumerate(board):
         if n % 9 == 8: s += str(p) + "\n"
         else: s += str(p) + ","
-    #print(s)
+
     o_file.write(s)
     o_file.close()
 
@@ -136,7 +134,7 @@ def main(argv=None):
 
         if state == NEW_CELL: # we're on a new open cell
             guess,forced = nextValidGuess(board,cell,1)
-            #print ("NEW_CELL,cell,guess,forced",cell,guess,forced)
+            print ("NEW_CELL,cell,guess,forced",cell,guess,forced)
             if not guess: # failed to find a valid guess for this cell, backtrack
                 state = BACKTRACK
             else:
@@ -154,11 +152,13 @@ def main(argv=None):
             continue
 
         if state == BACKTRACK: # backtrack
+            print("\n\n")
             nback += 1
+            print(mystack.peek())
             cell,board = mystack.pop()
             old_guess = board[cell]
             guess,forced = nextValidGuess(board,cell,old_guess+1)  # note: state cannot be forced
-            #print('BACKTRACK,cell,guess,forced',cell,guess,forced)
+            print('BACKTRACK,cell,guess,forced',cell,guess,forced)
             if not guess:
                 state = BACKTRACK
             else:
