@@ -86,6 +86,13 @@ def makeNeighbors(board):
     s = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_s)]) # (rs // 3) * 3 + (cs // 3)
     return r, c, s
 
+def nextOpenCell (board, start):
+    try:
+        retVal = board.index('_', start+1)
+    except ValueError:
+        retVal = None
+    return retVal
+
 def main(argv=None):
     if not argv:
         argv = sys.argv
