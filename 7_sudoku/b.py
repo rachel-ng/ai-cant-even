@@ -64,7 +64,6 @@ def getBoard(argv):
     i_file.close()
     boards = dict()
     prev = ""
-    print(input_f)
     for i in input_f:
         if len(i) == 3:
             prev = i[0] +"-"+i[2]
@@ -74,34 +73,59 @@ def getBoard(argv):
                 boards[prev] = []
         elif i[0] != '':
             boards[prev].append([int(n) if n != '_' else 0 for n in i])
-            print(boards[prev])
-    print(boards)
-    print(argv[3])
     n = argv[3].split(',')
     return n[0] + '-' + n[2], [n for i in boards[n[0] + '-' + n[2]] for n in i]
 
 def makeNeighbors(board):
+    global r, c, s
     r = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_r)]) # n // 9
     c = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_c)]) # n % 9
     s = dict([[n,[board[k] for k in i]] for n,i in enumerate(cliques_s)]) # (rs // 3) * 3 + (cs // 3)
     return r, c, s
 
 def nextOpenCell (board, start):
-    try:
-        retVal = board.index('_', start+1)
-    except ValueError:
-        retVal = None
-    return retVal
+    try: return board.index(0, start+1)
+    except ValueError: return None
+
+def coords (n) :
+    r = n // 9 # row
+    c = n % 9 # col
+    s = (r // 3) * 3 + (c // 3) # square
+    s_pos = (r % 3) * 3 + (c % 3)
+    pos = r * 9 + c # calculate the original position
+    return r, c, s
+
+def nextValidGuess(board, cell, start):
+    rs, cs, ss = coords(cell)
+    makeNeighbors(board)
+    pos = (AllVals - set(r[rs])) & (AllVals - set(c[cs])) & (AllVals - set(s[ss]))
+    while start in r[rs] or start in c[cs] or start in s[ss]: start+= 1
+    if start in AllVals:return start, len(pos) < 1
+    else: return False, False
+
+def printBoard(board):
+    b = [[board[k] for k in i] for n,i in enumerate(cliques_r)]
+    for i in b:
+        print (i)
+
+def writeBoard(argv,name,board):
+    o_file = open(argv[2], "w+")
+    s = ""
+    n = 0
+    for n,p in enumerate(board):
+        if n % 9 == 8: s += str(p) + "\n"
+        else: s += str(p) + ","
+    #print(s)
+    o_file.write(s)
+    o_file.close()
 
 def main(argv=None):
     if not argv:
         argv = sys.argv
-
     name,board = getBoard(argv)
-    print(name, board)
+    #print(name, board)
     mystack = MyStack()
-    r, c, s = makeNeighbors(board)
-    print(r, c, s)
+    makeNeighbors(board)
     nback = 0
     ntrials = 0
     cell = nextOpenCell(board,-1)
@@ -110,12 +134,10 @@ def main(argv=None):
         ntrials += 1
         #if ntrials % 10000 == 0: print ('ntrials,nback',ntrials,nback)
 
-        # we're on a new open cell
-        if state == NEW_CELL:
+        if state == NEW_CELL: # we're on a new open cell
             guess,forced = nextValidGuess(board,cell,1)
             #print ("NEW_CELL,cell,guess,forced",cell,guess,forced)
-            if not guess:
-                # failed to find a valid guess for this cell, backtrack
+            if not guess: # failed to find a valid guess for this cell, backtrack
                 state = BACKTRACK
             else:
                 board[cell] = guess
@@ -124,17 +146,14 @@ def main(argv=None):
                 state = FIND_NEXT_CELL
             continue
 
-        # find a new open cell
-        if state == FIND_NEXT_CELL:
+        if state == FIND_NEXT_CELL: # find a new open cell
             cell = nextOpenCell(board,cell)
-            if not cell:
-                # Solution!
+            if not cell: # Solution!
                 break
             state = NEW_CELL
             continue
 
-        # backtrack
-        if state == BACKTRACK:
+        if state == BACKTRACK: # backtrack
             nback += 1
             cell,board = mystack.pop()
             old_guess = board[cell]
@@ -148,8 +167,7 @@ def main(argv=None):
                 state = FIND_NEXT_CELL
             continue
 
-    print ('Solution!, with ntrials, backtracks: ', ntrials,nback)
-    printBoard(board)
+    print(nback)
     writeBoard(argv,name,board)
 
 
