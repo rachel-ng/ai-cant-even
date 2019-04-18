@@ -103,17 +103,17 @@ def printBoard(board):
     rip = ""
     print("rows")
     for i in [[board[k] for k in i] for n,i in enumerate(cliques_r)]:
-        rip += str(i) + "\t" + sum(i) + "\n"
+        rip += "r:\t" + str(i) + "\t" + str(sum(i))+ "\n"
         if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
         if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
     print("cols")
     for i in [[board[k] for k in i] for n,i in enumerate(cliques_c)]:
-        rip += str(i) + "\t" + sum(i) + "\n"
+        rip += "c:\t" + str(i) + "\t" + str(sum(i))+ "\n"
         if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
         if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
     print("squares")
     for i in [[board[k] for k in i] for n,i in enumerate(cliques_s)]:
-        rip += str(i) + "\t" + sum(i) + "\n"
+        rip += "s:\t" + str(i) + "\t" + str(sum(i))+ "\n"
         if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
         if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
 
