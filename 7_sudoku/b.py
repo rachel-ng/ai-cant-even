@@ -118,7 +118,7 @@ def printBoard(board):
         if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
 
 def writeBoard(argv,name,board,nback):
-    o_file = open(argv[3].replace(".","_").split(",")[1], "w+")
+    o_file = open(argv[3].replace(".","_").split(",")[1] + ".txt", "w+")
     s = str(nback) + "\n"
 
     for n,p in enumerate(board):
