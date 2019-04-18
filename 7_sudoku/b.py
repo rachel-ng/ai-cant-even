@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 import sys
+from datetime import datetime
 
 class MyStack:
     def __init__ (self, size=100):
@@ -59,7 +60,7 @@ def getBoard(argv):
     prev = ""
     for i in input_f:
         if len(i) == 3:
-            prev = i[0] +"-"+i[2]
+            prev = i[1] +"-"+i[2]
             if i[2] == 'solved':
                 boards[prev] = [] # do i need to solve this board?
             else:
@@ -67,7 +68,9 @@ def getBoard(argv):
         elif i[0] != '':
             boards[prev].append([int(n) if n != '_' else 0 for n in i])
     n = argv[3].split(',')
-    return n[0] + '-' + n[2], [n for i in boards[n[0] + '-' + n[2]] for n in i]
+    if n[1] + "-solved" in boards.keys(): solution = [n for i in boards[n[1] + "-solved"] for n in i]
+    else: solution = "no sol in file"
+    return n[1] + '-' + n[2], [n for i in boards[n[1] + '-' + n[2]] for n in i], solution
 
 def makeNeighbors(board):
     global r, c, s
@@ -97,13 +100,26 @@ def nextValidGuess(board, cell, start):
     else: return False, False
 
 def printBoard(board):
-    b = [[board[k] for k in i] for n,i in enumerate(cliques_r)]
-    for i in b:
-        print (i)
+    rip = ""
+    print("rows")
+    for i in [[board[k] for k in i] for n,i in enumerate(cliques_r)]:
+        rip += i + "\t" + sum(i) + "\n"
+        if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
+        if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
+    print("cols")
+    for i in [[board[k] for k in i] for n,i in enumerate(cliques_c)]:
+        rip += i + "\t" + sum(i) + "\n"
+        if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
+        if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
+    print("squares")
+    for i in [[board[k] for k in i] for n,i in enumerate(cliques_s)]:
+        rip += i + "\t" + sum(i) + "\n"
+        if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
+        if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
 
-def writeBoard(argv,name,board):
-    o_file = open(argv[2], "w+")
-    s = ""
+def writeBoard(argv,name,board,nback):
+    o_file = open(argv[3].replace(".","_").split(",")[1], "w+")
+    s = str(nback) + "\n"
 
     for n,p in enumerate(board):
         if n % 9 == 8: s += str(p) + "\n"
@@ -113,9 +129,10 @@ def writeBoard(argv,name,board):
     o_file.close()
 
 def main(argv=None):
+    start = datetime.now()
     if not argv:
         argv = sys.argv
-    name,board = getBoard(argv)
+    name,board,solution = getBoard(argv)
     #print(name, board)
     mystack = MyStack()
     makeNeighbors(board)
@@ -125,7 +142,7 @@ def main(argv=None):
     state = NEW_CELL
     while True:
         ntrials += 1
-        #if ntrials % 10000 == 0: print ('ntrials,nback',ntrials,nback)
+        if ntrials % 10000 == 0: print ('ntrials,nback',ntrials,nback)
 
         if state == NEW_CELL: # we're on a new open cell
             guess,forced = nextValidGuess(board,cell,1)
@@ -160,8 +177,13 @@ def main(argv=None):
                 state = FIND_NEXT_CELL
             continue
 
-    #print(nback)
-    writeBoard(argv,name,board)
+    end = datetime.now()-start
+    print(nback)
+    if solution == "no sol in file":
+        print(writeBoard(argv,name,board,str(nback) + "\t" + str(end) + "\n"+ printBoard(board)))
+    else:print(board == solution)
+
+
 
 
 
