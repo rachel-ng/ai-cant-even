@@ -101,17 +101,14 @@ def nextValidGuess(board, cell, start):
 
 def printBoard(board):
     rip = ""
-    print("rows")
     for i in [[board[k] for k in i] for n,i in enumerate(cliques_r)]:
         rip += "r:\t" + str(i) + "\t" + str(sum(i))+ "\n"
         if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
         if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
-    print("cols")
     for i in [[board[k] for k in i] for n,i in enumerate(cliques_c)]:
         rip += "c:\t" + str(i) + "\t" + str(sum(i))+ "\n"
         if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
         if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
-    print("squares")
     for i in [[board[k] for k in i] for n,i in enumerate(cliques_s)]:
         rip += "s:\t" + str(i) + "\t" + str(sum(i))+ "\n"
         if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
