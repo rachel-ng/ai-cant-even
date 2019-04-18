@@ -116,6 +116,7 @@ def printBoard(board):
         rip += "s:\t" + str(i) + "\t" + str(sum(i))+ "\n"
         if sum(i) != 45: rip += "oh shieeeeeet, you done fucked up broski " + str(i)
         if set(i) - AllVals != set(): rip += "oh shieeeeeet dawg, you REALLY really done fucked up " + str(i)
+    return rip
 
 def writeBoard(argv,name,board,nback):
     o_file = open(argv[3].replace(".","_").split(",")[1] + ".txt", "w+")
