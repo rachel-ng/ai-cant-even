@@ -142,7 +142,7 @@ def main(argv=None):
     state = NEW_CELL
     while True:
         ntrials += 1
-        if ntrials % 1000000 == 0: print (ntrials,nback)
+        #if ntrials % 1000000 == 0: print (ntrials,nback)
 
         if state == NEW_CELL: # we're on a new open cell
             guess,forced = nextValidGuess(board,cell,1)
@@ -178,10 +178,10 @@ def main(argv=None):
             continue
 
     end = datetime.now()-start
-    print(nback, end)
     if solution == "no sol in file":
         print(writeBoard(argv,name,board,str(nback) + "\t" + str(end) + "\n"+ printBoard(board)))
     else:print(board == solution)
+    print(nback, end)
 
 
 
