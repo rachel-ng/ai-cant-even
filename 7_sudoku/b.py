@@ -177,8 +177,9 @@ def main(argv=None):
 
     end = datetime.now()-start
     if solution == "no sol in file":
-        print(writeBoard(argv,name,board,str(nback) + "\t" + str(end) + "\n"+ printBoard(board)))
-    else:print(board == solution)
+        writeBoard(argv,name,board,str(nback) + "\t" + str(end) + "\n"+ printBoard(board))
+    else:
+        print(board == solution)
     print(nback, end)
 
 
