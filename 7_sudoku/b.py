@@ -116,7 +116,7 @@ def printBoard(board):
     return rip
 
 def writeBoard(argv,name,board,nback):
-    o_file = open(argv[3].replace(".","_").split(",")[1] + ".txt", "w+")
+    o_file = open(argv[3].replace(".","_").replace("/","_").split(",")[1] + ".txt", "w+")
     s = str(nback) + "\n"
 
     for n,p in enumerate(board):
