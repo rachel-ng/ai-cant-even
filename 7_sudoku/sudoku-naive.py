@@ -87,15 +87,12 @@ def makeNeighbors():
     return d
 
 def nextOpenCell(board, start):
-    try:
-        retVal = board.index(0, start+1)
-    except ValueError:
-        retVal = None
-    return retVal
+    try: return board.index(0, start+1)
+    except ValueError: return None
 
 def nextValidGuess(board, cell, n):
-    neighbors_values = [ board[neighbor] for neighbor in d[cell] ]
-    possibilities = AllVals - { value for value in neighbors_values if value != 0 }
+    neighbors_values = [board[neighbor] for neighbor in d[cell]]
+    possibilities = AllVals - {value for value in neighbors_values if value != 0}
     while n not in possibilities and n <= 9:
         n += 1
     if n in AllVals:
@@ -113,15 +110,16 @@ def printBoard(board):
             line_str = ""
             i = 0
 
-def writeBoard(argv, name, board,ntrials,nback):
-    file_name = name[:4] + '_t-' + str(ntrials) + '_b-' + str(nback) + '.txt'
-    print(file_name)
-    with open(file_name, 'w') as output_file:
-        s =""
+def writeBoard(argv, name, board, ntrials, nback, time):
+    #file_name = name[:4] + '_t-' + str(ntrials) + '_b-' + str(nback) + '_t-' + str(time) + 's.txt'
+    with open(OUTPUT_FILE, 'a+') as output_file:
+        s = name + "\nnback: " + str(nback) + "\tntrials: " + str(ntrials) + "\ntime: "
+        if time // 60 > 0: s += str(int(time // 60)) + "m " + str(time % 60) + "s\n"
+        else: s +=  str(time % 60) + "s\n"
         for n,p in enumerate(board):
             if n % 9 == 8: s += str(p) + "\n"
             else: s += str(p) + ","
-        output_file.write(s)
+        output_file.write(s + "\n\n")
     output_file.close()
 
     
@@ -132,15 +130,15 @@ BACKTRACK = 2
 AllVals = set([1,2,3,4,5,6,7,8,9])
 
 INPUT_FILE = sys.argv[1]
-#OUTPUT_FILE = sys.argv[2]
-#BOARD_TO_SOLVE = sys.argv[3]
-BOARD_TO_SOLVE = sys.argv[2]
+OUTPUT_FILE = sys.argv[2]
+BOARD_TO_SOLVE = sys.argv[3]
+#BOARD_TO_SOLVE = sys.argv[2]
   
 def main(argv=None):
+    start = time.time()
     if not argv:
         argv = sys.argv
 
-        
     name,board = getBoard(BOARD_TO_SOLVE)
     print(board)
     mystack = Stack()
@@ -194,19 +192,30 @@ def main(argv=None):
     print ('Solution!, with ntrials, backtracks: ', ntrials,nback)
     # print(board)
     printBoard(board)
-    writeBoard(argv,name,board,ntrials,nback)
+    writeBoard(argv,name,board,ntrials,nback, time.time() - start)
 
 main()
 
 
-```
-time python3 master-boards.txt A1-1,Easy-NYTimes,unsolved
-A1-1,Easy-NYTimes,unsolved
-A2-1,Medium-NYTimes,unsolved
-A3-1,Hard-NYTimes,unsolved
-A4-1,WebSudoku-Hard,unsolved
-A5-1,WebSudoku-Evil,unsolved
-A6-1,hardest-sudoku-telegraph,unsolved
-A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
-A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
-```
+
+'''
+time python3 sudoku-naive.py master-boards.txt A1-1,Easy-NYTimes,unsolved
+time python3 sudoku-naive.py master-boards.txt A2-1,Medium-NYTimes,unsolved
+time python3 sudoku-naive.py master-boards.txt A3-1,Hard-NYTimes,unsolved
+time python3 sudoku-naive.py master-boards.txt A4-1,WebSudoku-Hard,unsolved
+time python3 sudoku-naive.py master-boards.txt A5-1,WebSudoku-Evil,unsolved
+time python3 sudoku-naive.py master-boards.txt A6-1,hardest-sudoku-telegraph,unsolved
+time python3 sudoku-naive.py master-boards.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
+time python3 sudoku-naive.py master-boards.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
+'''
+
+'''
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A1-1,Easy-NYTimes,unsolved
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A2-1,Medium-NYTimes,unsolved
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A3-1,Hard-NYTimes,unsolved
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A4-1,WebSudoku-Hard,unsolved
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A5-1,WebSudoku-Evil,unsolved
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A6-1,hardest-sudoku-telegraph,unsolved
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
+time python3 sudoku-naive.py master-boards.txt naive_out.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
+'''
