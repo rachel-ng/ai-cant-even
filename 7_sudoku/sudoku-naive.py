@@ -75,24 +75,12 @@ def getBoard(argv):
 
 def makeNeighbors():
     global d
+    start1 = time.time()
     d = {}
     for i in range(81):
-        neighbors = set()
-        for clique in cliques:
-            if i in clique:
-                for clique_member in clique:
-                    if clique_member != i:
-                        neighbors.add(clique_member)
-        print ("neighbors", neighbors)
-        #print({clique_member for i in clique if clique_member != i for clique in cliques })
-        print("self", [clique_member for clique_member in clique if clique_member != i for clique in cliques if i in clique])
-        print("self", {clique_member for clique_member in clique if clique_member != i for clique in cliques if i in clique})
+        d[i] = {member for clique in cliques for member in clique if i in clique and i != member}
+    time1 = time.time() - start1
 
-        print(neighbors - {clique_member for clique_member in clique if clique_member != i for clique in cliques if i in clique})
-        print("")
-
-        
-        d[i] = neighbors
     return d
 
 def nextOpenCell(board, start):
