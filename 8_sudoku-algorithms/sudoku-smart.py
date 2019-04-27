@@ -10,6 +10,24 @@ import time
 # start = time.time()
 # print(time.time() - start)
 
+
+'''
+things that don't work (well):
+
+def nextOpenCell(board):
+    try:
+        cell = (places - set([n for n,p in enumerate(board) if p != 0])).pop()
+        return cell
+    except KeyError: return None
+
+notes: made them all slower, some (S O M E) had fewer backtracks, other didn't
+
+
+
+
+
+'''
+
 class Stack: # FILO
     def __init__ (self):
         self.list = []
@@ -101,9 +119,8 @@ def printBoard(board):
 def writeBoard(argv, name, board, ntrials, nback, time):
     #file_name = name[:4] + '_t-' + str(ntrials) + '_b-' + str(nback) + '_t-' + str(time) + 's.txt'
     with open(OUTPUT_FILE, 'a+') as output_file:
-        s = name + "\tntrials: " + str(ntrials) + "\nnback: " + str(nback) # trials and backtracks
-        if time // 60 > 0: s += "\ntime: " + str(int(time // 60)) + "m " + str(time % 60) + "s\n" # time
-
+        s = name + "\nntrials: " + str(ntrials) + "\nnback: " + str(nback) + "\ntime: " # trials and backtracks
+        if time // 60 > 0: s += str(int(time // 60)) + "m " + str(time % 60) + "s\n" # time
         else: s +=  str(time % 60) + "s\n"
         for n,p in enumerate(board):
             if n % 9 == 8: s += str(p) + "\n"
@@ -117,6 +134,7 @@ NEW_CELL = 0
 FIND_NEXT_CELL = 1
 BACKTRACK = 2
 AllVals = set([1,2,3,4,5,6,7,8,9])
+places = set(range(81))
 
 INPUT_FILE = sys.argv[1]
 OUTPUT_FILE = sys.argv[2]
@@ -129,6 +147,7 @@ def main(argv=None):
         argv = sys.argv
 
     name,board = getBoard(BOARD_TO_SOLVE)
+
     mystack = Stack()
     makeNeighbors()
     nback = 0
@@ -136,6 +155,8 @@ def main(argv=None):
     cell = nextOpenCell(board,-1)
     state = NEW_CELL
     while True:
+        #printBoard(board)
+        #print("")
         ntrials += 1
         #if ntrials % 10000 == 0: print ('ntrials,nback',ntrials,nback)
 
@@ -155,7 +176,7 @@ def main(argv=None):
 
         # find a new open cell
         if state == FIND_NEXT_CELL:
-            cell = nextOpenCell(board,cell)
+            cell = nextOpenCell(board, cell)
             if not cell:
                 # Solution!
                 break
@@ -187,23 +208,23 @@ main()
 
 
 '''
-time python3 sudoku-naive.py master-boards.txt A1-1,Easy-NYTimes,unsolved
-time python3 sudoku-naive.py master-boards.txt A2-1,Medium-NYTimes,unsolved
-time python3 sudoku-naive.py master-boards.txt A3-1,Hard-NYTimes,unsolved
-time python3 sudoku-naive.py master-boards.txt A4-1,WebSudoku-Hard,unsolved
-time python3 sudoku-naive.py master-boards.txt A5-1,WebSudoku-Evil,unsolved
-time python3 sudoku-naive.py master-boards.txt A6-1,hardest-sudoku-telegraph,unsolved
-time python3 sudoku-naive.py master-boards.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
-time python3 sudoku-naive.py master-boards.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
+time python3 sudoku-smart.py master-boards.txt A1-1,Easy-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt A2-1,Medium-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt A3-1,Hard-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt A4-1,WebSudoku-Hard,unsolved
+time python3 sudoku-smart.py master-boards.txt A5-1,WebSudoku-Evil,unsolved
+time python3 sudoku-smart.py master-boards.txt A6-1,hardest-sudoku-telegraph,unsolved
+time python3 sudoku-smart.py master-boards.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
+time python3 sudoku-smart.py master-boards.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
 '''
 
 '''
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A1-1,Easy-NYTimes,unsolved
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A2-1,Medium-NYTimes,unsolved
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A3-1,Hard-NYTimes,unsolved
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A4-1,WebSudoku-Hard,unsolved
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A5-1,WebSudoku-Evil,unsolved
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A6-1,hardest-sudoku-telegraph,unsolved
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
-time python3 sudoku-naive.py master-boards.txt naive_out.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A1-1,Easy-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A2-1,Medium-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A3-1,Hard-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A4-1,WebSudoku-Hard,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A5-1,WebSudoku-Evil,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A6-1,hardest-sudoku-telegraph,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
 '''
