@@ -83,6 +83,15 @@ def makeNeighbors():
                 for clique_member in clique:
                     if clique_member != i:
                         neighbors.add(clique_member)
+        print ("neighbors", neighbors)
+        #print({clique_member for i in clique if clique_member != i for clique in cliques })
+        print("self", [clique_member for clique_member in clique if clique_member != i for clique in cliques if i in clique])
+        print("self", {clique_member for clique_member in clique if clique_member != i for clique in cliques if i in clique})
+
+        print(neighbors - {clique_member for clique_member in clique if clique_member != i for clique in cliques if i in clique})
+        print("")
+
+        
         d[i] = neighbors
     return d
 
