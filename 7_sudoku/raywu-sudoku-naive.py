@@ -78,8 +78,6 @@ def makeNeighbors():
                     if clique_member != i:
                         neighbors.add(clique_member)
         d[i] = neighbors
-    for i in d:
-        print (i,d[i])
     return d
 
 def nextOpenCell(board, start):
@@ -146,7 +144,6 @@ def main(argv=None):
         argv = sys.argv
     
     name,board = getBoard(BOARD_TO_SOLVE)
-    print(board)
     mystack = Stack()
     makeNeighbors()
     nback = 0
