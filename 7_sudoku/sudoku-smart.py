@@ -10,10 +10,7 @@ import time
 # start = time.time()
 # print(time.time() - start)
 
-# Simple list implementation of a Stack (FILO)
-
-class Stack:
-
+class Stack: # FILO
     def __init__ (self):
         self.list = []
 
@@ -55,11 +52,10 @@ cliques=[[0,1,2,3,4,5,6,7,8],\
          [33,34,35,42,43,44,51,52,53],\
          [54,55,56,63,64,65,72,73,74],\
          [57,58,59,66,67,68,75,76,77],\
-         [60,61,62,69,70,71,78,79,80]\
-]
+         [60,61,62,69,70,71,78,79,80]]
 
 def getBoard(argv):
-    input_file = open(INPUT_FILE,'r').read().strip().split('\n')
+    input_file = open(INPUT_FILE,'r+').read().strip().split('\n')
     board = []
     trip = False
     i = 0
@@ -76,8 +72,6 @@ def getBoard(argv):
 def makeNeighbors():
     global d
     d = dict([[i,{member for clique in cliques for member in clique if i in clique and i != member}] for i in range(81)])
-    for i in d:
-        print (i,d[i])
     return d
 
 def nextOpenCell(board, start):
@@ -92,7 +86,7 @@ def nextValidGuess(board, cell, n):
     if n in AllVals:
         return n, len(possibilities) < 1
     return None, False
-    
+
 def printBoard(board):
     i = 0
     line_str = ""
@@ -107,8 +101,9 @@ def printBoard(board):
 def writeBoard(argv, name, board, ntrials, nback, time):
     #file_name = name[:4] + '_t-' + str(ntrials) + '_b-' + str(nback) + '_t-' + str(time) + 's.txt'
     with open(OUTPUT_FILE, 'a+') as output_file:
-        s = name + "\nnback: " + str(nback) + "\tntrials: " + str(ntrials) + "\ntime: "
-        if time // 60 > 0: s += str(int(time // 60)) + "m " + str(time % 60) + "s\n"
+        s = name + "\tntrials: " + str(ntrials) + "\nnback: " + str(nback) # trials and backtracks
+        if time // 60 > 0: s += "\ntime: " + str(int(time // 60)) + "m " + str(time % 60) + "s\n" # time
+
         else: s +=  str(time % 60) + "s\n"
         for n,p in enumerate(board):
             if n % 9 == 8: s += str(p) + "\n"
@@ -116,7 +111,7 @@ def writeBoard(argv, name, board, ntrials, nback, time):
         output_file.write(s + "\n\n")
     output_file.close()
 
-    
+
 # States
 NEW_CELL = 0
 FIND_NEXT_CELL = 1
@@ -127,14 +122,13 @@ INPUT_FILE = sys.argv[1]
 OUTPUT_FILE = sys.argv[2]
 BOARD_TO_SOLVE = sys.argv[3]
 #BOARD_TO_SOLVE = sys.argv[2]
-  
+
 def main(argv=None):
     start = time.time()
     if not argv:
         argv = sys.argv
 
     name,board = getBoard(BOARD_TO_SOLVE)
-    print(board)
     mystack = Stack()
     makeNeighbors()
     nback = 0
@@ -144,7 +138,7 @@ def main(argv=None):
     while True:
         ntrials += 1
         #if ntrials % 10000 == 0: print ('ntrials,nback',ntrials,nback)
-        
+
         # we're on a new open cell
         if state == NEW_CELL:
             guess,forced = nextValidGuess(board,cell,1)
@@ -158,7 +152,7 @@ def main(argv=None):
                     mystack.push([cell,board[:]])
                     state = FIND_NEXT_CELL
             continue
-        
+
         # find a new open cell
         if state == FIND_NEXT_CELL:
             cell = nextOpenCell(board,cell)
@@ -167,7 +161,7 @@ def main(argv=None):
                 break
             state = NEW_CELL
             continue
-        
+
         # backtrack
         if state == BACKTRACK:
             nback += 1
@@ -182,7 +176,7 @@ def main(argv=None):
                 mystack.push([cell,board[:]])
                 state = FIND_NEXT_CELL
             continue
-        
+
     print ('Solution!, with ntrials, backtracks: ', ntrials,nback)
     # print(board)
     printBoard(board)
