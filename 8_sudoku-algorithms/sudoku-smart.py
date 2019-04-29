@@ -39,6 +39,121 @@ notes: made them all slower, some (S O M E) had fewer backtracks, other didn't
 
 '''
 
+def OrdinaryComparison(a,b):
+    if a < b: return -1
+    if a == b: return 0
+    return 1
+
+def len_comp(a,b):
+    if len(a) == len(b):
+        if a[0] < b[0]:
+            return -1
+        if a[0] > b[0]:
+            return 1
+        else:
+            return 0
+    if len(a) < len(b):
+        return -1
+    return 1
+
+class Pqueue:
+    def __init__ (self, comp = OrdinaryComparison, init=None):
+        self.cmpfunc = comp
+        self.size = 0
+        self.list = [None]
+        if init: self.push_all(init)
+
+    def push (self, data):
+        if self.size == len(self.list) - 1:
+            self.list.append(data)
+        else:
+            if self.size == 0:
+                self.list[1] = data
+            else:
+                self.list[self.size + 1] = data
+
+        self.size += 1
+        if self.size == 1:
+            return
+
+        c_ind = self.size
+        p_ind = c_ind // 2
+
+        while self.cmpfunc(self.list[p_ind], self.list[c_ind]) == 1 and c_ind != 0:
+            self.list[p_ind], self.list[c_ind] = self.list[c_ind], self.list[p_ind]
+            c_ind = p_ind
+            p_ind = c_ind // 2
+
+            if p_ind == 0 or c_ind == 1:
+                break
+
+    def pop (self):
+        popped = self.list[1]
+        self.list[1] = self.list[self.size]
+        self.list[self.size] = None
+        self.size -= 1
+        if self.size == 1:
+            return popped
+
+        pos = 0
+        c_ind = 1
+
+        while c_ind < self.size and pos < self.size:
+            pos += 1
+
+            if (c_ind * 2 + 1 > self.size or c_ind * 2 + 1 > self.size) or (self.list[c_ind * 2 + 1] == None and self.list[c_ind * 2] == None):
+                break
+
+            if self.list[c_ind * 2] == None and self.list[c_ind * 2 + 1] and self.cmpfunc(self.list[c_ind], self.list[c_ind * 2 + 1]) == 1:
+                        self.list[c_ind], self.list[c_ind * 2 + 1] = self.list[c_ind * 2 + 1], self.list[c_ind]
+
+            elif self.list[c_ind * 2 + 1] == None and self.list[c_ind * 2] and self.cmpfunc(self.list[c_ind], self.list[c_ind * 2]) == 1:
+                        self.list[c_ind], self.list[c_ind * 2] = self.list[c_ind * 2], self.list[c_ind]
+
+            else:
+                if self.cmpfunc(self.list[c_ind], self.list[c_ind * 2]) == 1 or self.cmpfunc(self.list[c_ind], self.list[c_ind * 2 + 1]) == 1:
+                    if self.cmpfunc(self.list[c_ind * 2], self.list[c_ind * 2 + 1]) == 1:
+                        self.list[c_ind], self.list[c_ind * 2 + 1] = self.list[c_ind * 2 + 1], self.list[c_ind]
+                        c_ind = c_ind * 2 + 1
+                    else:
+                        self.list[c_ind], self.list[c_ind * 2] = self.list[c_ind * 2], self.list[c_ind]
+                        c_ind = c_ind * 2
+
+        return popped
+
+    def peek (self):
+        return self.list[1]
+
+    def tolist (self):
+        size = self.size
+        return [self.pop() for i in range(size)]
+
+    def push_all(self, lst):
+        for i in lst:
+            self.push(i)
+
+    def internal_list(self):
+        return self.list[1 : self.size + 1]
+
+
+
+class Cell:
+    def __init__ (self, cell, neighbors, empty_neighbors, values):
+        self.cell = cell
+        self.neighbors = neighbors
+        self.empty_neighbors = empty_neighbors
+        self.current_neighbors = empty_neighbors
+        self.values = values # possible values
+        self.current_values = values
+
+    def __str__ (self):
+        s = str(self.cell) + "\t" + str(self.values) + "\n" + str(self.empty_neighbors) + "\n" + str(self.neighbors)
+        return (s)
+
+    def neighbors (self,neighbor):
+        self.current_neighbors.discard(neighbor)
+
+
 class Stack: # FILO
     def __init__ (self):
         self.list = []
@@ -54,6 +169,8 @@ class Stack: # FILO
 
     def clear(self):
         self.list = []
+
+
 
 cliques=[[0,1,2,3,4,5,6,7,8],\
          [9,10,11,12,13,14,15,16,17],\
@@ -88,6 +205,7 @@ cliques_r = [[0,1,2,3,4,5,6,7,8],[9,10,11,12,13,14,15,16,17],[18,19,20,21,22,23,
 cliques_c = [[0,9,18,27,36,45,54,63,72],[1,10,19,28,37,46,55,64,73],[2,11,20,29,38,47,56,65,74],[3,12,21,30,39,48,57,66,75],[4,13,22,31,40,49,58,67,76],[5,14,23,32,41,50,59,68,77],[6,15,24,33,42,51,60,69,78],[7,16,25,34,43,52,61,70,79],[8,17,26,35,44,53,62,71,80]]
 
 cliques_s = [[0,1,2,9,10,11,18,19,20],[3,4,5,12,13,14,21,22,23],[6,7,8,15,16,17,24,25,26],[27,28,29,36,37,38,45,46,47],[30,31,32,39,40,41,48,49,50],[33,34,35,42,43,44,51,52,53],[54,55,56,63,64,65,72,73,74],[57,58,59,66,67,68,75,76,77],[60,61,62,69,70,71,78,79,80]]
+
 
 
 def getBoard(argv):
@@ -155,6 +273,7 @@ def writeBoard(argv, name, board, ntrials, nback, time):
     output_file.close()
 
 
+
 # States
 NEW_CELL = 0
 FIND_NEXT_CELL = 1
@@ -166,21 +285,34 @@ OUTPUT_FILE = sys.argv[2]
 BOARD_TO_SOLVE = sys.argv[3]
 #BOARD_TO_SOLVE = sys.argv[2]
 
+
+
 def main(argv=None):
     start = time.time()
     if not argv:
         argv = sys.argv
 
     name,board = getBoard(BOARD_TO_SOLVE)
+    #print(board)
     possible_places = set(range(81))
     places = possible_places & set([n for n,p in enumerate(board) if p != 0 ])
-    print(places)
+    #print(places)
     mystack = Stack()
+
     makeNeighbors()
     makeNeighbors2()
-    print(r)
-    print(c)
-    print(s)
+
+    poss_neighbors = dict([[i, d[i] & places] for i in places])
+    poss_guesses = dict([[i, AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0}] for i in places])
+    print(poss_neighbors)
+    print(poss_guesses)
+
+    empty_cells = dict([[i,Cell(i,d[i],d[i] & places,AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0})] for i in places])
+
+    for i in empty_cells:
+        print(i)
+        print(empty_cells[i])
+        print("")
 
     print([sum([board[k] for k in i]) for i in cliques_r])
     print([[board[k] for k in i] for i in cliques_r])
