@@ -23,6 +23,19 @@ def nextOpenCell(board):
 notes: made them all slower, some (S O M E) had fewer backtracks, other didn't
 
 
+- look at neighbors
+  - if one of it's neighbors' possible values are the same, then that's the next one you should try
+  - if there's only 2 possible values then it has to be one or the other - these possible values can also be eliminated from other neighbors, but that'd be tested when you proceed to the next open cell (?)
+
+- would be faster if you could check the ones with the fewest possible values first
+  - lmao use a priority queue and reorder them by doing the ones with fewest possible values first wait no that'd change every time and you'd have to calculate all of them
+
+
+
+
+
+
+
 
 '''
 
@@ -168,6 +181,15 @@ def main(argv=None):
     print(r)
     print(c)
     print(s)
+
+    print([sum([board[k] for k in i]) for i in cliques_r])
+    print([[board[k] for k in i] for i in cliques_r])
+    print([sum([board[k] for k in i]) for i in cliques_c])
+    print([[board[k] for k in i] for i in cliques_c])
+    print([sum([board[k] for k in i]) for i in cliques_s])
+    print([[board[k] for k in i] for i in cliques_s])
+
+
     nback = 0
     ntrials = 0
     cell = nextOpenCell(board,-1)
