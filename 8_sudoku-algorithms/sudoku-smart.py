@@ -39,121 +39,6 @@ notes: made them all slower, some (S O M E) had fewer backtracks, other didn't
 
 '''
 
-def OrdinaryComparison(a,b):
-    if a < b: return -1
-    if a == b: return 0
-    return 1
-
-def len_comp(a,b):
-    if len(a) == len(b):
-        if a[0] < b[0]:
-            return -1
-        if a[0] > b[0]:
-            return 1
-        else:
-            return 0
-    if len(a) < len(b):
-        return -1
-    return 1
-
-class Pqueue:
-    def __init__ (self, comp = OrdinaryComparison, init=None):
-        self.cmpfunc = comp
-        self.size = 0
-        self.list = [None]
-        if init: self.push_all(init)
-
-    def push (self, data):
-        if self.size == len(self.list) - 1:
-            self.list.append(data)
-        else:
-            if self.size == 0:
-                self.list[1] = data
-            else:
-                self.list[self.size + 1] = data
-
-        self.size += 1
-        if self.size == 1:
-            return
-
-        c_ind = self.size
-        p_ind = c_ind // 2
-
-        while self.cmpfunc(self.list[p_ind], self.list[c_ind]) == 1 and c_ind != 0:
-            self.list[p_ind], self.list[c_ind] = self.list[c_ind], self.list[p_ind]
-            c_ind = p_ind
-            p_ind = c_ind // 2
-
-            if p_ind == 0 or c_ind == 1:
-                break
-
-    def pop (self):
-        popped = self.list[1]
-        self.list[1] = self.list[self.size]
-        self.list[self.size] = None
-        self.size -= 1
-        if self.size == 1:
-            return popped
-
-        pos = 0
-        c_ind = 1
-
-        while c_ind < self.size and pos < self.size:
-            pos += 1
-
-            if (c_ind * 2 + 1 > self.size or c_ind * 2 + 1 > self.size) or (self.list[c_ind * 2 + 1] == None and self.list[c_ind * 2] == None):
-                break
-
-            if self.list[c_ind * 2] == None and self.list[c_ind * 2 + 1] and self.cmpfunc(self.list[c_ind], self.list[c_ind * 2 + 1]) == 1:
-                        self.list[c_ind], self.list[c_ind * 2 + 1] = self.list[c_ind * 2 + 1], self.list[c_ind]
-
-            elif self.list[c_ind * 2 + 1] == None and self.list[c_ind * 2] and self.cmpfunc(self.list[c_ind], self.list[c_ind * 2]) == 1:
-                        self.list[c_ind], self.list[c_ind * 2] = self.list[c_ind * 2], self.list[c_ind]
-
-            else:
-                if self.cmpfunc(self.list[c_ind], self.list[c_ind * 2]) == 1 or self.cmpfunc(self.list[c_ind], self.list[c_ind * 2 + 1]) == 1:
-                    if self.cmpfunc(self.list[c_ind * 2], self.list[c_ind * 2 + 1]) == 1:
-                        self.list[c_ind], self.list[c_ind * 2 + 1] = self.list[c_ind * 2 + 1], self.list[c_ind]
-                        c_ind = c_ind * 2 + 1
-                    else:
-                        self.list[c_ind], self.list[c_ind * 2] = self.list[c_ind * 2], self.list[c_ind]
-                        c_ind = c_ind * 2
-
-        return popped
-
-    def peek (self):
-        return self.list[1]
-
-    def tolist (self):
-        size = self.size
-        return [self.pop() for i in range(size)]
-
-    def push_all(self, lst):
-        for i in lst:
-            self.push(i)
-
-    def internal_list(self):
-        return self.list[1 : self.size + 1]
-
-
-
-class Cell:
-    def __init__ (self, cell, neighbors, empty_neighbors, values):
-        self.cell = cell
-        self.neighbors = neighbors
-        self.empty_neighbors = empty_neighbors
-        self.current_neighbors = empty_neighbors
-        self.values = values # possible values
-        self.current_values = values
-
-    def __str__ (self):
-        s = str(self.cell) + "\t" + str(self.values) + "\n" + str(self.empty_neighbors) + "\n" + str(self.neighbors)
-        return (s)
-
-    def neighbors (self,neighbor):
-        self.current_neighbors.discard(neighbor)
-
-
 class Stack: # FILO
     def __init__ (self):
         self.list = []
@@ -341,6 +226,10 @@ def main(argv=None):
     set_guesses = {}
     for c in places:
         set_guesses[c] = p_guesses[c].difference(*[p_guesses[i] for i in p_neighbors[c]])
+
+    for i in list(places):
+        if len(set_guesses[i]) == 1:
+            board[i] = set_guesses.pop()
 
     nback = 0
     ntrials = 0
