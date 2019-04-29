@@ -235,19 +235,34 @@ def makeNeighbors2():
     s = dict([[i,{member for clique in cliques_s for member in clique if i in clique and i != member}] for i in range(81)]) # (rs // 3) * 3 + (cs // 3)
     return r, c, s
 
+# def nextOpenCell(board, start):
+#     try: return board.index(0, start+1)
+#     except ValueError: return None
 
-def nextOpenCell(board, start):
-    try: return board.index(0, start+1)
-    except ValueError: return None
 
-def nextValidGuess(board, cell, n):
-    neighbors_values = [board[neighbor] for neighbor in d[cell]]
-    possibilities = AllVals - {value for value in neighbors_values if value != 0}
-    while n not in possibilities and n <= 9:
-        n += 1
-    if n in AllVals:
-        return n, len(possibilities) < 1
-    return None, False
+def nextOpenCell(board):
+    try:
+        return min(p_guesses, key= lambda x: len(p_guesses[x]))
+    except: return None
+
+
+def nextValidGuess(board, cell,possible = None,prev_guess = {}):
+    #neighbors_values = [board[neighbor] for neighbor in d[cell]]
+    #possibilities = AllVals - {value for value in neighbors_values if value != 0}
+    #while n not in possibilities and n <= 9:
+        #n += 1
+    if possible == None:
+        possibilities = p_guesses.pop(cell)
+        print(possibilities)
+        if len(possibilities) > 1:
+            return possibilities, len(possibilities) - 1 < 1
+        return None, False
+    else:
+        print(possible)
+        if len(possible) > 1:
+            return possible - prev_guess, len(possible) - 1 < 1
+        return None, False
+
 
 def printBoard(board):
     i = 0
@@ -302,17 +317,24 @@ def main(argv=None):
     makeNeighbors()
     makeNeighbors2()
 
-    poss_neighbors = dict([[i, d[i] & places] for i in places])
-    poss_guesses = dict([[i, AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0}] for i in places])
-    print(poss_neighbors)
-    print(poss_guesses)
+    global p_neighbors, p_guesses
+
+    p_neighbors = dict([[i, d[i] & places] for i in places])
+    p_guesses = dict([[i, AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0}] for i in places])
+
+    print(p_neighbors)
+    print(p_guesses)
+
+    print(min(p_guesses, key=lambda k: p_guesses[k]))
 
     empty_cells = dict([[i,Cell(i,d[i],d[i] & places,AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0})] for i in places])
 
-    for i in empty_cells:
-        print(i)
-        print(empty_cells[i])
-        print("")
+    # for i in empty_cells:
+    #     print(i)
+    #     print(empty_cells[i])
+    #     print("")
+
+    print("\nsums")
 
     print([sum([board[k] for k in i]) for i in cliques_r])
     print([[board[k] for k in i] for i in cliques_r])
@@ -324,8 +346,9 @@ def main(argv=None):
 
     nback = 0
     ntrials = 0
-    cell = nextOpenCell(board,-1)
+    cell = nextOpenCell(board)#,-1)
     state = NEW_CELL
+    print(cell)
     while True:
         #printBoard(board)
         #print("")
@@ -334,21 +357,25 @@ def main(argv=None):
 
         # we're on a new open cell
         if state == NEW_CELL:
-            guess,forced = nextValidGuess(board,cell,1)
-            #print ("NEW_CELL,cell,guess,forced",cell,guess,forced)
-            if not guess:
+            possible,forced = nextValidGuess(board,cell)
+            if not possible or len(possible) == 0:
                 # failed to find a valid guess for this cell, backtrack
                 state = BACKTRACK
             else:
+                guess = possible.pop()
+                print ("NEW_CELL,cell,guess,forced",cell,guess,forced)
+                for i in p_neighbors[cell]:
+                    if i in p_guesses:
+                        p_guesses[i].discard(guess)
                 board[cell] = guess
                 if not forced:
-                    mystack.push([cell,board[:]])
+                    mystack.push([cell,board[:],possible])
                     state = FIND_NEXT_CELL
             continue
 
         # find a new open cell
         if state == FIND_NEXT_CELL:
-            cell = nextOpenCell(board, cell)
+            cell = nextOpenCell(board)#, cell)
             if not cell:
                 # Solution!
                 break
@@ -358,19 +385,23 @@ def main(argv=None):
         # backtrack
         if state == BACKTRACK:
             nback += 1
-            cell,board = mystack.pop()
+            cell,board,possible = mystack.pop()
             old_guess = board[cell]
-            guess,forced = nextValidGuess(board,cell,old_guess+1)  # note: state cannot be forced
+            possible,forced = nextValidGuess(board,cell,possible,old_guess)  # note: state cannot be forced
             #print('BACKTRACK,cell,guess,forced',cell,guess,forced)
-            if not guess:
+            if not possible or len(possible) == 0:
                 state = BACKTRACK
             else:
+                guess = possible.pop()
+                for i in p_neighbors[cell]:
+                    if i in p_guesses:
+                        p_guesses[i].add(guess)
                 board[cell] = guess
-                mystack.push([cell,board[:]])
+                mystack.push([cell,board[:]],possible)
                 state = FIND_NEXT_CELL
             continue
 
-    print ('Solution!, with ntrials, backtracks: ', ntrials,nback)
+    print ('\nSolution!, with ntrials, backtracks: ', ntrials,nback)
     # print(board)
     printBoard(board)
     writeBoard(argv,name,board,ntrials,nback, time.time() - start)
