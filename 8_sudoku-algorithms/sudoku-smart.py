@@ -113,13 +113,6 @@ def makeNeighbors():
     d = dict([[i,{member for clique in cliques for member in clique if i in clique and i != member}] for i in range(81)])
     return d
 
-def makeNeighbors2():
-    global r, c, s
-    r = dict([[i,{member for clique in cliques_r for member in clique if i in clique and i != member}] for i in range(81) if i in places]) # n // 9
-    c = dict([[i,{member for clique in cliques_c for member in clique if i in clique and i != member}] for i in range(81) if i in places]) # n % 9
-    s = dict([[i,{member for clique in cliques_s for member in clique if i in clique and i != member}] for i in range(81) if i in places]) # (rs // 3) * 3 + (cs // 3)
-    return r, c, s
-
 def nextOpenCell(board, start):
     try: return board.index(0, start+1)
     except ValueError: return None
@@ -177,59 +170,32 @@ def main(argv=None):
         argv = sys.argv
 
     name,board = getBoard(BOARD_TO_SOLVE)
-    #print(board)
+    print(board)
 
     global places
 
     possible_places = set(range(81))
-    places = possible_places & set([n for n,p in enumerate(board) if p != 0 ])
-    #print(places)
+    places = possible_places & set([n for n,p in enumerate(board) if p == 0 ])
     mystack = Stack()
 
     makeNeighbors()
-
-    # makeNeighbors2()
-    # print(r)
-    # print(c)
-    # print(s)
-    # print("")
 
     p_neighbors = dict([[i, d[i] & places] for i in places])
     p_guesses = dict([[i, AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0}] for i in places])
 
     print(p_neighbors)
     print(p_guesses)
-
-    #empty_cells = dict([[i,Cell(i,d[i],d[i] & places,AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0})] for i in places])
-
-    # for i in empty_cells:
-    #     print(i)
-    #     print(empty_cells[i])
-    #     print("")
-
-    print("\nsums")
-
-    print([sum([board[k] for k in i]) for i in cliques_r])
-    r_ind = [[board[k] for k in i] for i in cliques_r]
-    print([sum([0 if k != 0 else 1 for k in i]) for i in r_ind])
-
-    print([sum([board[k] for k in i]) for i in cliques_c])
-    c_ind = [[board[k] for k in i] for i in cliques_c]
-    print([sum([0 if k != 0 else 1 for k in i]) for i in c_ind])
-
-    print([sum([board[k] for k in i]) for i in cliques_s])
-    s_ind = [[board[k] for k in i] for i in cliques_s]
-    print([sum([0 if k != 0 else 1 for k in i]) for i in s_ind])
-
     #print(p_guesses[2].difference(*[p_guesses[i] for i in p_neighbors[2]]))
 
     set_guesses = {}
     for c in places:
-        set_guesses[c] = p_guesses[c].difference(*[p_guesses[i] for i in p_neighbors[c]])
+        set_guesses[c] = list(p_guesses[c].difference(*[p_guesses[i] for i in p_neighbors[c]]))
+
+    print(set_guesses)
 
     for i in list(places):
         if len(set_guesses[i]) == 1:
-            board[i] = set_guesses.pop()
+            board[i] = list(set_guesses[i])[0]
 
     nback = 0
     ntrials = 0
