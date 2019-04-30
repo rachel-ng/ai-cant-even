@@ -120,6 +120,8 @@ def nextOpenCell(board, start):
 def nextValidGuess(board, cell, n):
     neighbors_values = [board[neighbor] for neighbor in d[cell]]
     possibilities = AllVals - {value for value in neighbors_values if value != 0}
+    possibilities_2 = p_guesses[cell].difference(*[{board[i]} for i in p_neighbors[cell]])
+    if len(possibilities_2) == 1: set_guesses[cell] = possibilities_2
     while n not in possibilities and n <= 9:
         n += 1
     if n in AllVals:
@@ -180,18 +182,35 @@ def main(argv=None):
 
     makeNeighbors()
 
+    global p_neighbors, p_guesses
     p_neighbors = dict([[i, d[i] & places] for i in places])
     p_guesses = dict([[i, AllVals - {value for value in [board[neighbor] for neighbor in d[i]] if value != 0}] for i in places])
 
-    print(p_neighbors)
-    print(p_guesses)
+    print([sum([board[k] for k in i]) for i in cliques_r])
+    r_all = [[board[k] for k in i] for i in cliques_r]
+    r_m = [[1 if i in k else 0 for i in range(1,10) ] for k in r_all]
+    print(r_m)
+
+    print([sum([board[k] for k in i]) for i in cliques_c])
+    c_all = [[board[k] for k in i] for i in cliques_c]
+    c_m = [[1 if i in k else 0 for i in range(1,10) ] for k in c_all]
+    print(c_m)
+
+    print([sum([board[k] for k in i]) for i in cliques_s])
+    s_all = [[board[k] for k in i] for i in cliques_s]
+    s_m = [[1 if i in k else 0 for i in range(1,10) ] for k in s_all]
+    print(s_m)
+
+    #print(p_neighbors)
+    #print(p_guesses)
     #print(p_guesses[2].difference(*[p_guesses[i] for i in p_neighbors[2]]))
 
+    global set_guesses
     set_guesses = {}
     for c in places:
         set_guesses[c] = list(p_guesses[c].difference(*[p_guesses[i] for i in p_neighbors[c]]))
 
-    print(set_guesses)
+    #print(set_guesses)
 
     for i in list(places):
         if len(set_guesses[i]) == 1:
@@ -249,7 +268,8 @@ def main(argv=None):
     # print(board)
 
     for c in places:
-        print(board[c], set_guesses[c])
+        if len(set_guesses[c]) > 0:
+            print(c, board[c], set_guesses[c])
 
     printBoard(board)
     writeBoard(argv,name,board,ntrials,nback, time.time() - start)
@@ -270,12 +290,12 @@ time python3 sudoku-smart.py master-boards.txt A8-1,sudokugarden_100sudoku2-Nr-5
 '''
 
 '''
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A1-1,Easy-NYTimes,unsolved
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A2-1,Medium-NYTimes,unsolved
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A3-1,Hard-NYTimes,unsolved
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A4-1,WebSudoku-Hard,unsolved
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A5-1,WebSudoku-Evil,unsolved
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A6-1,hardest-sudoku-telegraph,unsolved
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
-time python3 sudoku-smart.py master-boards.txt smart_out.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A1-1,Easy-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A2-1,Medium-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A3-1,Hard-NYTimes,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A4-1,WebSudoku-Hard,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A5-1,WebSudoku-Evil,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A6-1,hardest-sudoku-telegraph,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
+time python3 sudoku-smart.py master-boards.txt smart_out2.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
 '''
