@@ -207,12 +207,3 @@ time python3 sudoku-smart.py master-boards.txt smart_out.txt A6-1,hardest-sudoku
 time python3 sudoku-smart.py master-boards.txt smart_out.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
 time python3 sudoku-smart.py master-boards.txt smart_out.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
 '''
-
-time python3 nuh.py master-boards.txt nuh.txt A1-1,Easy-NYTimes,unsolved
-time python3 nuh.py master-boards.txt nuh.txt A2-1,Medium-NYTimes,unsolved
-time python3 nuh.py master-boards.txt nuh.txt A3-1,Hard-NYTimes,unsolved
-time python3 nuh.py master-boards.txt nuh.txt A4-1,WebSudoku-Hard,unsolved
-time python3 nuh.py master-boards.txt nuh.txt A5-1,WebSudoku-Evil,unsolved
-time python3 nuh.py master-boards.txt nuh.txt A6-1,hardest-sudoku-telegraph,unsolved
-time python3 nuh.py master-boards.txt nuh.txt A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
-time python3 nuh.py master-boards.txt nuh.txt A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
