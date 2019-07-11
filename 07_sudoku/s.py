@@ -14,6 +14,7 @@ def s_board (in_f):
     rec = dict([[i,[[0] * 9,[0] * 9]] for i in range(10)[1:]])
     possible = dict([[i,[[],[]]] for i in range(10)[1:]])
     squares =  dict([[i,[[0] * 3,[0] * 3,[0] * 3]] for i in range(10)[1:]])
+    squares_2 =  dict([[i,[0] * 9] for i in range(10)[1:]])
     #print(possible)
 
     r = 0
@@ -28,6 +29,7 @@ def s_board (in_f):
                 rec[n][0][r] = n
                 rec[n][1][c] = n
                 squares[box][r % 3][c % 3] = n
+                squares_2[box][(r % 3) * 3 + (c % 3)] = n
             c += 1
         r += 1
 
@@ -37,6 +39,9 @@ def s_board (in_f):
         for x in squares[i]:
             print(x)
         print("")
+    print("squares 2")
+    for i in squares_2:
+        print(squares_2[i])
     print("board")
     for i in board:
         print (i)

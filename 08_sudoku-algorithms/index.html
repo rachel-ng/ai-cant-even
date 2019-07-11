@@ -1,0 +1,267 @@
+<!DOCTYPE html >
+<html>
+  <head>
+    <title>Smarter Sudoku Solver</title>
+
+    <style>
+      table {
+          width: 750px;
+          margin: 0 auto 50px auto;
+          border-collapse: collapse;
+      }
+      th, td {
+          padding: 10px;
+      }
+      #t1 th {
+          width: 80px;
+      }
+      th, td {
+          border: 1px solid black;
+      }
+      pre {
+          width: 500px;
+          margin: 0 auto 20px auto;
+          padding: 10px;
+          word-break: break-all;
+      }
+      p {
+          margin: 0 auto 20px auto;
+      }
+    </style>
+
+  </head>
+
+  <body>
+
+    <center><h1 style="margin-bottom: 10px;">Smarter Sudoku Solver</h1>
+      <h3 style="margin-bottom: 5px;">Rachel Ng</h3>
+      <small>worked with Raymond Wu</small>
+    </center>
+
+    <p></p>
+
+    <center><h3>Naive</h3></center>
+    <p style="width: 750px;">Looks for the next open cell, makes a guess and sets that cell to the guess and then continues until backtracking when there a cell has no guesses.</p>
+    <table>
+      <tr>
+        <td style="border: none;"></td>
+        <th>A1</th>
+        <th>A2</th>
+        <th>A3</th>
+        <th>A4</th>
+        <th>A5</th>
+        <th>A6</th>
+        <th>A7</th>
+        <th>A8</th>
+      </tr>
+      <tr>
+        <th>Time</th>
+        <td>0.0102s</td>
+        <td>0.3404s</td>
+        <td>0.1392s</td>
+        <td>0.4789s</td>
+        <td>0.0904s</td>
+        <td>0.5894s</td>
+        <td>31.7204s</td>
+        <td>240.3585s</td>
+      </tr>
+      <tr>
+        <th>Backtracks</th>
+        <td>260</td>
+        <td>27917</td>
+        <td>10616</td>
+        <td>39975</td>
+        <td>6964</td>
+        <td>49498</td>
+        <td>2482069</td>
+        <td>19029872</td>
+      </tr>
+    </table>
+
+    <center><h3>Smarter #1</h3></center>
+    <p style="width: 750px;">Same as Naive, but instead this gives you a randomly popped cell (from a set of all the empty cells) instead of looking for the next open one (in order).<br>
+      Strangely enough: it reduced the number of backtracks for <i>only some of them</i>, and generally doubled the time (unsurprisingly, considering that it does more processing).<br>
+      <b>A1, A4, A5, and A7 all had fewer backtracks.</b></p>
+    <pre>def nextOpenCell(board):
+      try:return (places - set([n for n,p in enumerate(board) if p != 0])).pop()
+      except KeyError: return None</pre>
+    <table>
+      <tr>
+        <td style="border: none;"></td>
+        <th style="background:#eaeec8;">A1</th>
+        <th>A2</th>
+        <th>A3</th>
+        <th style="background:#eaeec8;">A4</th>
+        <th style="background:#eaeec8;">A5</th>
+        <th>A6</th>
+        <th style="background:#eaeec8;">A7</th>
+        <th>A8</th>
+      </tr>
+      <tr>
+        <th>Time</th>
+        <td style="background:#eaeec8;">0.0187s</td>
+        <td>1.0440s</td>
+        <td>0.2734s</td>
+        <td style="background:#eaeec8;">0.8663s</td>
+        <td style="background:#eaeec8;">0.1629s</td>
+        <td>1.5338s</td>
+        <td style="background:#eaeec8;">61.0505s</td>
+        <td> 500.6787s</td>
+      </tr>
+      <tr>
+        <th>Backtracks</th>
+        <td style="background:#eaeec8;">250</td>
+        <td>44468</td>
+        <td>11699</td>
+        <td style="background:#eaeec8;">38761</td>
+        <td style="background:#eaeec8;">6941</td>
+        <td>68600</td>
+        <td style="background:#eaeec8;">24728484</td>
+        <td>21369751</td>
+      </tr>
+      <tr>
+        <th>Ratio</th>
+        <td style="background:#eaeec8;">1.044</td>
+        <td>0.628</td>
+        <td>0.907</td>
+        <td style="background:#eaeec8;">1.031</td>
+        <td style="background:#eaeec8;">1.003</td>
+        <td>0.722</td>
+        <td style="background:#eaeec8;">1.004</td>
+        <td>0.892</td>
+      </tr>
+    </table>
+
+    <p></p>
+
+    <center><h3>Smarter #2</h3></center>
+    <p style="width: 750px;">Same as Naive, but it instead first checks a cell's possible values against it's neighbors' and eliminates all of its neighbors' possible values. If the list's length is 1, then it replaces that cell's value with the guess in the list and then continues on to the recursive backtracking.<br>
+      This minimally helps, if at all. It seems to be more efficient on generally "easier" boards&mdash; this is likely because there are more values that can be initially "forced", which allows fewer backtracks to occur.<br>
+      <b>A1, A3, A4, and A5 all had fewer backtracks.</b></p>
+    <pre>set_guesses = {}
+for c in places:
+    set_guesses[c] = list(p_guesses[c].difference(*[p_guesses[i] for i in p_neighbors[c]]))
+
+for i in list(places):
+    if len(set_guesses[i]) == 1:
+        board[i] = list(set_guesses[i])[0]</pre>
+    <table>
+      <tr>
+        <td style="border: none;"></td>
+        <th style="background:#eaeec8;">A1</th>
+        <th>A2</th>
+        <th style="background:#eaeec8;">A3</th>
+        <th style="background:#eaeec8;">A4</th>
+        <th style="background:#eaeec8;">A5</th>
+        <th>A6</th>
+        <th>A7</th>
+        <th>A8</th>
+      </tr>
+      <tr>
+        <th>Time</th>
+        <td style="background:#eaeec8;">0.01192s</td>
+        <td>0.3832s</td>
+        <td style="background:#eaeec8;">0.1502s</td>
+        <td style="background:#eaeec8;">0.5368s</td>
+        <td style="background:#eaeec8;">0.0969s</td>
+        <td>0.6504s</td>
+        <td>33.9722s</td>
+        <td>263.0839s</td>
+      </tr>
+      <tr>
+        <th>Backtracks</th>
+        <td style="background:#eaeec8;">233</td>
+        <td>27917</td>
+        <td style="background:#eaeec8;">10616</td>
+        <td style="background:#eaeec8;">39716</td>
+        <td style="background:#eaeec8;">6954</td>
+        <td>49498</td>
+        <td>2482069</td>
+        <td>19029872</td>
+      </tr>
+      <tr>
+        <th>Ratio</th>
+        <td style="background:#eaeec8;">1.121</td>
+        <td>1</td>
+        <td style="background:#eaeec8;">1.007</td>
+        <td style="background:#eaeec8;">1.002</td>
+        <td style="background:#eaeec8;">1.003</td>
+        <td>1</td>
+        <td>1</td>
+        <td>1</td>
+      </tr>
+    </table>
+
+        <center><h3>Smarter #3</h3></center>
+    <p style="width: 750px;">A combination of the aforementioned 2 "algorithms".<br>
+      The intelligence of this is sadly questionable, but honestly all of them are, especially when considering the efficacy of the algorithms.<br>
+
+      <b>A4, A5, and A7 all had fewer backtracks.</b></p>
+    <table>
+      <tr>
+        <td style="border: none;"></td>
+        <th>A1</th>
+        <th>A2</th>
+        <th>A3</th>
+        <th style="background:#eaeec8;">A4</th>
+        <th style="background:#eaeec8;">A5</th>
+        <th>A6</th>
+        <th style="background:#eaeec8;">A7</th>
+        <th>A8</th>
+      </tr>
+      <tr>
+        <th>Time</th>
+        <td>0.0121s</td>
+        <td>1.0679</td>
+        <td>0.2791s</td>
+        <td style="background:#eaeec8;">0.8986s</td>
+        <td style="background:#eaeec8;">0.1742s</td>
+        <td>1.5245s</td>
+        <td style="background:#eaeec8;">55.4871s</td>
+        <td>490.9916s</td>
+      </tr>
+      <tr>
+        <th>Backtracks</th>
+        <td>263</td>
+        <td>44468</td>
+        <td>11699</td>
+        <td style="background:#eaeec8;">38502</td>
+        <td style="background:#eaeec8;">6948</td>
+        <td>68600</td>
+        <td style="background:#eaeec8;">2472848</td>
+        <td>21369751</td>
+      </tr>
+      <tr>
+        <th>Ratio</th>
+        <td>0.992</td>
+        <td>0.628</td>
+        <td>0.907</td>
+        <td style="background:#eaeec8;">1.006</td>
+        <td style="background:#eaeec8;">1.002</td>
+        <td>0.721</td>
+        <td style="background:#eaeec8;">1.004</td>
+        <td>0.891</td>
+      </tr>
+    </table>
+
+    <center><h3>Things I Tried But Couldn't Get Working</h3></center>
+    <p style="width: 750px;">Using (math) matrices to solve for cells. (Think solving for linear equations). It probably doesn't help that I never them, and that it's probably not the greatest idea especially considering that it involves a lot of computations, which would slow down the program / algorithm.</p>
+    <p style="width: 750px;">Referencing neighbors&mdash; specifically checking for others with the same possible values, and then doing that one next. Would probably be especially helpful if there are only 2 possible values.</p>
+    <p style="width: 750px;">Checking for cells with the fewest possible values and doing those first, this would've helped a lot in combination with referencing neighbors, or doing the neighbor with the fewest possible values next, and when out of neighbors, moving on to another random cell.
+      <br>Attempting to implement this resulted in many errors, even after I decided to attempt a few other ways, so I decided to give up. Although I do now realize that using <i>all_empty</i> from <i>checkForced()</i> (below) would probably help a lot, but would also increase computational time.</p>
+    <p style="width: 750px;">Checking for forced cells after making a guess. While it did result in fewer trials and backtracks, the solutions were also wrong. It also caused errors with the rest of my code, which msot of the things I tried to get working, but couldn't, did.<br>
+
+      <a href="sudoku/forced_cells.txt">Results</a> from testing forced cells.<br>
+      The code that epically failed:</p>
+    <pre>def checkForced(board):
+    all_empty = [n for n,p in enumerate(board) if p == 0]
+    for i in all_empty:
+        belongs = [k for k in cliques if i in k]
+        vals = [sum([1 for k in i if board[k] != 0]) for i in belongs]
+        if 8 in vals:
+            for j in belongs:
+                if sum([1 for x in j if board[x] != 0]) == 8:
+        board[i] = list(AllVals - set([board[x] for x in j]))[0]</pre>
+  </body>
+
+</html>

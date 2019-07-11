@@ -1,0 +1,39 @@
+A1-1,Easy-NYTimes,unsolved
+ntrials: 866
+nback: 260
+time: 0.010226011276245117s
+
+A2-1,Medium-NYTimes,unsolved
+ntrials: 83865
+nback: 27917
+time: 0.34038710594177246s
+
+A3-1,Hard-NYTimes,unsolved
+ntrials: 31964
+nback: 10616
+time: 0.13921308517456055s
+
+A4-1,WebSudoku-Hard,unsolved
+ntrials: 120033
+nback: 39975
+time: 0.47886109352111816s
+
+A5-1,WebSudoku-Evil,unsolved
+ntrials: 21002
+nback: 6964
+time: 0.09041500091552734s
+
+A6-1,hardest-sudoku-telegraph,unsolved
+ntrials: 148614
+nback: 49498
+time: 0.5893762111663818s
+
+A7-1,sudokugarden_100sudoku2-Nr-100,unsolved
+ntrials: 7446335
+nback: 2482069
+time: 31.720417022705078s
+
+A8-1,sudokugarden_100sudoku2-Nr-50,unsolved
+ntrials: 57089744
+nback: 19029872
+time: 4m 0.358461856842041s

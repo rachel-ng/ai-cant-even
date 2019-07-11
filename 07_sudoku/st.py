@@ -71,64 +71,77 @@ FIND_NEXT_CELL = 1
 BACKTRACK = 2
 AllVals = set([1,2,3,4,5,6,7,8,9])
 
-def s_board (in_f):
-    vals = [1,2,3,4,5,6,7,8,9]
-
-    i_file = open(in_f,"r")
-    input_f = [line.strip().split(",") for line in i_file]
+def getBoard(argv):
+    print(argv)
+    i_file = open(argv[1],"r")
+    input_f = [line.rstrip().split(",") for line in i_file]
     i_file.close()
+    boards = dict()
+    prev = ""
+    for i in input_f:
+        if len(i) == 3:
+            prev = i[0] +"-"+i[2]
+            if i[2] == 'solved':
+                boards[prev] = [] # do i need to solve this board?
+            else:
+                boards[prev] = []
+        elif i[0] != '':
+            boards[prev].append([int(n) if n != '_' else 0 for n in i])
+    n = argv[3].split(',')
+    return n[0] + '-' + n[2], [n for i in boards[n[0] + '-' + n[2]] for n in i]
+
+def writeBoard(argv,name,board):
+    o_file = open(argv[2], "w+")
+    s = ""
+
+    for n,p in enumerate(board):
+        if n % 9 == 8: s += str(p) + "\n"
+        else: s += str(p) + ","
+
+    o_file.write(s)
+    o_file.close()
+
+def s_board (argv=None):
+    if not argv:
+        argv = sys.argv
+
+    name,board = getBoard(argv)
 
     stacked = MyStack()
 
-    board = [int(n) if n != '_' else 0 for i in input_f for n in i]
     empty = set([n for n,p in enumerate(board) if p == 0])
-    possible = dict([[i,None]for i in empty])
-
-    print(board)
-    print(len(board))
-    print(empty)
-
     neighbors = dict([i,set([member for clique in cliques if i in clique for member in clique if member != i])] for i in range(81))
+    possible = dict([[i,AllVals.copy() - set([board[k] for k in neighbors[i]])]for i in empty])
 
+    #print(neighbors)
+    print(possible)
     print("")
-    print(neighbors)
-    print("")
-
-    for i in empty:
-        possible[i] = set(vals[:]) - set([board[k] for k in neighbors[i]])
-        print(i, possible[i])
-
-   # for i in possible:
-        #rs, cs, ss = coords(i)
-        #update_b (i, possible[i].pop(), board, r, c, s)
-        #if len(possible[i]) == 0:
-        #board[i] = possible[i].pop()
-        #print(i)
-        #r[rs][cs] = board[i]
-        #c[cs][rs] = board[i]
-        #s[ss][(rs * 3) + cs] = board[i]
-        #stacked.push([i,board[:], possible.copy()])
 
     def nextGuess (cell):
-        if len(possible[cell]) > 0:
-            return possible[cell].pop(), len(possible[cell]) > 0
-        else:
+        pos = possible[cell] - set([board[cell]])
+        print(cell, len(pos), pos)
+        if len(pos) == 0:
             return False, False
+        else:
+            return pos.pop(), len(pos) == 0
+
+    def nextOpenCell (board, start):
+        try: return board.index(0, start+1)
+        except ValueError: return None
 
     nback = 0
     ntrials = 0
-    cell = empty.pop()
+    cell = nextOpenCell(board,-1)
     state = NEW_CELL
+
     while True:
         ntrials += 1
-        #if ntrials % 10000 == 0: print ('ntrials,nback',ntrials,nback)
+        if ntrials % 10000 == 0: print ('ntrials,nback',ntrials,nback)
 
         #print(stacked)
-        print(board)
         print(cell, board[cell])
         if state == NEW_CELL: # we're on a new open cell
             guess,forced = nextGuess(cell)
-            board[cell] = guess
             print ("NEW_CELL,cell,guess,forced",cell,guess,forced)
             if not guess: # failed to find a valid guess for this cell, backtrack
                 state = BACKTRACK
@@ -140,7 +153,7 @@ def s_board (in_f):
             continue
 
         if state == FIND_NEXT_CELL: # find a new open cell
-            cell = empty.pop()
+            cell = nextOpenCell(board,cell)
             if not cell: # Solution!
                 break
             state = NEW_CELL
@@ -149,7 +162,6 @@ def s_board (in_f):
         if state == BACKTRACK: # backtrack
             nback += 1
             cell,board,empty,possible = stacked.pop()
-            possible[cell] - {board[cell]}
             guess,forced =  nextGuess(cell) # note: state cannot be forced
             #print('BACKTRACK,cell,guess,forced',cell,guess,forced)
             if not guess:
@@ -168,7 +180,8 @@ def s_board (in_f):
     #    True
 
     print(board)
+    writeBoard(argv,name,board)
 
 
 if __name__ == "__main__":
-     s_board(sys.argv[1])
+     s_board()

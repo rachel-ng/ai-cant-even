@@ -1,0 +1,15 @@
+    print([sum([board[k] for k in i]) for i in cliques_r])
+    r_all = [[board[k] for k in i] for i in cliques_r]
+    r_m = [[1 if i in k else 0 for i in range(1,10) ] for k in r_all]
+    print(r_m)
+
+    print([sum([board[k] for k in i]) for i in cliques_c])
+    c_all = [[board[k] for k in i] for i in cliques_c]
+    c_m = [[1 if i in k else 0 for i in range(1,10) ] for k in c_all]
+    print(c_m)
+
+    print([sum([board[k] for k in i]) for i in cliques_s])
+    s_all = [[board[k] for k in i] for i in cliques_s]
+    s_m = [[1 if i in k else 0 for i in range(1,10) ] for k in s_all]
+    print(s_m)
+
